@@ -27,9 +27,12 @@ namespace fuzzy
 	template<class T>
 	T AndMin<T>::evaluate(core::Expression<T>* l,core::Expression<T>* r) const
 	{
-		if(l != NULL && r != NULL)
-			return ((l->evaluate()>= r->evaluate()) ? r->evaluate() : l->evaluate());
-		return NULL;
+		if(l != nullptr && r != nullptr)
+		{
+			T left = l->evaluate();
+			T right = r->evaluate();
+			return (left >= right) ? right : left;
+		}
 	}
 }
 #endif

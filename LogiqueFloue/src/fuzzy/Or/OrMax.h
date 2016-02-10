@@ -25,9 +25,12 @@ namespace fuzzy
 	template<class T>
 	T OrMax<T>::evaluate(core::Expression<T>* l,core::Expression<T>* r) const
 	{
-		if(l != NULL && r != NULL)
-			return ((l->evaluate()>=r->evaluate())? l->evaluate() : r->evaluate());
-		return NULL;
+		if(l != nullptr && r != nullptr)
+		{
+			T left = l->evaluate();
+			T right = r->evaluate();
+			return (left >= right)? left : right;
+		}
 	}
 }
 #endif /* FUZZY_OR_ORMAX_H_ */

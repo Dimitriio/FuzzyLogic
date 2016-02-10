@@ -26,7 +26,12 @@ namespace fuzzy
 	template<class T>
 	T ThenMin<T>::evaluate(core::Expression<T>* l, core::Expression<T>* r)const
 	{
-		return (1-((l->evaluate()>=r->evaluate())? r->evaluate():l->evaluate()));
+		if(l != nullptr && r != nullptr)
+		{
+			T left = l->evaluate();
+			T right = r->evaluate();
+			return 1-((left >= right)? right : left);
+		}
 	}
 }
 #endif /* FUZZY_THEN_THENMIN_H_ */

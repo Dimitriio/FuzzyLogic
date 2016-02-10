@@ -28,6 +28,7 @@ namespace fuzzy
 	template<class T>
 	T NotMinus1<T>::evaluate(core::Expression<T>* l) const
 	{
+		if(l != nullptr)
 			return (1- l->evaluate());
 	}
 }

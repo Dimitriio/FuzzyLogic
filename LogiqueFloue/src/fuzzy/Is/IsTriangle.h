@@ -35,11 +35,15 @@ namespace fuzzy
 	template<class T>
 	T IsTriangle<T>::evaluate(core::Expression<T>* l) const
 	{
-		if(l->evaluate()<min || l->evaluate()>max)
-			return 0;
-		else if(l->evaluate()<(min+max)/2)
-			return mid/((min+max)/2-min)*(l->evaluate()-min);
-		return -mid/(max-(min+max)/2)*(l->evaluate()-max);
+		if(l != nullptr)
+		{
+			T left = l->evaluate();
+			if(left < min || left > max)
+				return 0;
+			else
+				return (left < (min+max)/2) ? mid/((min+max)/2-min)*(left-min)
+						: -mid/(max-(min+max)/2)*(left-max);
+		}
 	}
 }
 

@@ -26,7 +26,12 @@ namespace fuzzy
 	template<class T>
 	T ThenMult<T>::evaluate(core::Expression<T>* l, core::Expression<T>* r)const
 	{
-		return (1-l->evaluate()+(l->evaluate()*r->evaluate()));
+		if(l != nullptr && r != nullptr)
+		{
+			T left = l->evaluate();
+			T right = r->evaluate();
+			return 1 - left +(left * right);
+		}
 	}
 }
 #endif /* FUZZY_THEN_THENMULT_H_ */
