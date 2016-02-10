@@ -28,7 +28,7 @@ namespace fuzzy
 	{
 		T left = l->evaluate();
 		T right = r->evaluate();
-		return (left +right- (left * right));
+		return left + right - (left * right);
 	}
 }
 

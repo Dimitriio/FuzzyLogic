@@ -30,7 +30,7 @@ namespace fuzzy
 		{
 			T left = l->evaluate();
 			T right = r->evaluate();
-			return 1 - left +(left * right);
+			return left * right;
 		}
 	}
 }
