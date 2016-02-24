@@ -9,7 +9,8 @@
 #define FUZZY_IS_ISTRIANGLE_H_
 
 #include "../core/Expression.h"
-#include "Is.h"
+#include "Operators.h"
+
 
 namespace fuzzy
 {

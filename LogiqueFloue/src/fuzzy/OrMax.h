@@ -9,7 +9,7 @@
 #define FUZZY_OR_ORMAX_H_
 
 #include "../core/Expression.h"
-#include "Or.h"
+#include "Operators.h"
 
 namespace fuzzy
 {

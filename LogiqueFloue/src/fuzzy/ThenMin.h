@@ -9,7 +9,7 @@
 #define FUZZY_THEN_THENMIN_H_
 
 #include "../core/Expression.h"
-#include "Then.h"
+#include "Operators.h"
 
 
 namespace fuzzy

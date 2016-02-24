@@ -9,7 +9,7 @@
 #define FUZZY_AGG_AGGPLUS_H_
 
 #include "../core/Expression.h"
-#include "Agg.h"
+#include "Operators.h"
 
 namespace fuzzy
 {

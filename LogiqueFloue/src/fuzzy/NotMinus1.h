@@ -9,7 +9,8 @@
 #define FUZZY_NOT_NOTMINUS1_H_
 
 #include "../core/Expression.h"
-#include "Not.h"
+#include "Operators.h"
+
 
 namespace fuzzy
 {

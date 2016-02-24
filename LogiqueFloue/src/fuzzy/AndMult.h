@@ -9,7 +9,7 @@
 #define FUZZY_AND_ANDMULT_H_
 
 #include "../core/Expression.h"
-#include "And.h"
+#include "Operators.h"
 
 namespace fuzzy
 {
