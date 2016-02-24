@@ -6,8 +6,8 @@
 // Description : FuzzyTest in C++, Ansi-style
 //============================================================================
 
-#include <cassert>
 #include <iostream>
+#include <cassert>
 
 #include "../core/BinaryExpressionModel.h"
 #include "../core/UnaryExpressionModel.h"
@@ -22,6 +22,8 @@
 #include "../fuzzy/OrPlus.h"
 #include "../fuzzy/ThenMin.h"
 #include "../fuzzy/ThenMult.h"
+
+
 
 void testValueModel()
 {
@@ -45,7 +47,6 @@ void testAndMult()
 	core::ValueModel<float>* l = new core::ValueModel<float>(0.2f);
 	core::ValueModel<float>* r = new core::ValueModel<float>(0.6f);
 	fuzzy::AndMult<float>* am = new fuzzy::AndMult<float>();
-	std::cout << "skgjn";
 	core::BinaryExpressionModel<float>* bem= new core::BinaryExpressionModel<float>(l, r, am);
 	assert((bem->evaluate()-0.12)<4e-6);  //voir comment comparer efficacement les float
 }
@@ -74,7 +75,7 @@ void testThenMin()
 	core::ValueModel<float>* r = new core::ValueModel<float>(0.4f);
 	fuzzy::ThenMin<float>* tm = new fuzzy::ThenMin<float>();
 	core::BinaryExpressionModel<float>* bem= new core::BinaryExpressionModel<float>(l, r, tm);
-	assert(bem->evaluate()==(1-0.1f));
+	assert(bem->evaluate()==(0.1f));
 }
 
 void testThenMult()
@@ -83,7 +84,7 @@ void testThenMult()
 	core::ValueModel<float>* r = new core::ValueModel<float>(0.4f);
 	fuzzy::ThenMult<float>* tm = new fuzzy::ThenMult<float>();
 	core::BinaryExpressionModel<float>* bem= new core::BinaryExpressionModel<float>(l, r, tm);
-	assert(bem->evaluate()==(1-0.1f+(0.1f*0.4f)));
+	assert(bem->evaluate()==(0.1f*0.4f));
 }
 
 void testAggMax()
