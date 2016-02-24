@@ -13,24 +13,25 @@
 namespace fuzzy
 {
 
-template <class T>
-class MandaniDefuzz : core::BinaryExpression<T>
-{
-public:
-	MandaniDefuzz(const T&, const T&, const T&);
-	virtual ~MandaniDefuzz() {};
+	template <class T>
+	class MandaniDefuzz : core::BinaryExpression<T>
+	{
+	public:
+		MandaniDefuzz(const T&, const T&, const T&);
+		virtual ~MandaniDefuzz() {};
 
-	T evaluate(Expression<T>*, Expression<T>*) const;
+		T evaluate(Expression<T>*, Expression<T>*) const;
+		virtual T defuzz(const Shape&) const = 0;
 
-	virtual T defuzz() const = 0;
+	private:
+		T min, max, step;
+	};
 
-private:
-
-	T min, max, step, current;
-};
-
-
-
-
+	template <class T>
+	T MandaniDefuzz<T>::evaluate(Expression<T> *s, Expression<T> *var) const
+	{
+		return defuzz(core::Evaluator<T>::BuildShape(min, max, step, (ValueModel<T>*)s, var));
+	}
+}
 
 #endif /* FUZZY_MANDANIDEFUZZ_H_ */
