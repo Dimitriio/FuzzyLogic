@@ -28,9 +28,9 @@ namespace fuzzy
 	};
 
 	template <class T>
-	T MandaniDefuzz<T>::evaluate(Expression<T> *s, Expression<T> *var) const
+	T MandaniDefuzz<T>::evaluate(Expression<T> *s, Expression<T> *f) const
 	{
-		return defuzz(core::Evaluator<T>::BuildShape(min, max, step, (ValueModel<T>*)s, var));
+		return defuzz(core::Evaluator<T>::BuildShape(min, max, step, (ValueModel<T>*)s, f));
 	}
 }
 
