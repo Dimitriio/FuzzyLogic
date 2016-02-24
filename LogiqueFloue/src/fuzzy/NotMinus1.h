@@ -8,9 +8,7 @@
 #ifndef FUZZY_NOT_NOTMINUS1_H_
 #define FUZZY_NOT_NOTMINUS1_H_
 
-#include <stddef.h>
-
-#include "../../core/Expression.h"
+#include "../core/Expression.h"
 #include "Not.h"
 
 namespace fuzzy

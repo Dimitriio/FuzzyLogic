@@ -8,6 +8,9 @@
 #ifndef FUZZY_NOT_NOT_H_
 #define FUZZY_NOT_NOT_H_
 
+#include "../core/Expression.h"
+#include "../core/UnaryExpression.h"
+
 namespace fuzzy
 {
 	template<class T>

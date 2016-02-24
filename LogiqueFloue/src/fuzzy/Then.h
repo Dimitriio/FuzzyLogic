@@ -8,9 +8,9 @@
 #ifndef FUZZY_THEN_THEN_H_
 #define FUZZY_THEN_THEN_H_
 
-#include "../../core/BinaryExpression.h"
-#include "../../core/Expression.h"
-#include "../Or/Or.h"
+#include "../core/BinaryExpression.h"
+#include "../core/Expression.h"
+
 
 namespace fuzzy
 {

@@ -8,7 +8,7 @@
 #ifndef FUZZY_IS_ISTRIANGLE_H_
 #define FUZZY_IS_ISTRIANGLE_H_
 
-#include "../../core/Expression.h"
+#include "../core/Expression.h"
 #include "Is.h"
 
 namespace fuzzy

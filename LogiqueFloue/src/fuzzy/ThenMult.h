@@ -8,8 +8,8 @@
 #ifndef FUZZY_THEN_THENMULT_H_
 #define FUZZY_THEN_THENMULT_H_
 
-#include "../../core/Expression.h"
-#include "../Then/Then.h"
+#include "../core/Expression.h"
+#include "Then.h"
 
 namespace fuzzy
 {

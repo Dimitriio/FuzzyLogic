@@ -8,7 +8,8 @@
 #ifndef FUZZY_OR_ORMAX_H_
 #define FUZZY_OR_ORMAX_H_
 
-#include "../Or/Or.h"
+#include "../core/Expression.h"
+#include "Or.h"
 
 namespace fuzzy
 {

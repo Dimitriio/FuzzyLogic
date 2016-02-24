@@ -8,8 +8,8 @@
 #ifndef FUZZY_AGG_AGGMAX_H_
 #define FUZZY_AGG_AGGMAX_H_
 
-#include "../../core/Expression.h"
-#include "../Agg/Agg.h"
+#include "../core/Expression.h"
+#include "Agg.h"
 
 namespace fuzzy
 {

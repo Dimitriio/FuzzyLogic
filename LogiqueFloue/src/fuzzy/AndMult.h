@@ -8,6 +8,9 @@
 #ifndef FUZZY_AND_ANDMULT_H_
 #define FUZZY_AND_ANDMULT_H_
 
+#include "../core/Expression.h"
+#include "And.h"
+
 namespace fuzzy
 {
 	template<class T>

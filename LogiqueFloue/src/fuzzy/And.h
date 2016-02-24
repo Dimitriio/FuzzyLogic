@@ -8,8 +8,8 @@
 #ifndef FUZZY_AND_AND_H_
 #define FUZZY_AND_AND_H_
 
-#include "../../core/BinaryExpression.h"
-#include "../../core/Expression.h"
+#include "../core/BinaryExpression.h"
+#include "../core/Expression.h"
 
 namespace fuzzy
 {
