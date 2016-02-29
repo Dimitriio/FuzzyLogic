@@ -21,11 +21,18 @@ namespace fuzzy
 		virtual ~MandaniDefuzz() {};
 
 		T evaluate(Expression<T>*, Expression<T>*) const;
-		virtual T defuzz(const Shape&) const = 0;
+		virtual T defuzz(const core::Evaluator::Shape&) const = 0;
 
 	private:
 		T min, max, step;
 	};
+
+	template <class T>
+	MandaniDefuzz<T>::MandaniDefuzz(const T& _min, const T& _max, const T& _step) :
+	min(_min), max(_max), step(_step)
+	{
+
+	}
 
 	template <class T>
 	T MandaniDefuzz<T>::evaluate(Expression<T> *s, Expression<T> *f) const
