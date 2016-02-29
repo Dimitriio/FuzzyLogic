@@ -8,13 +8,14 @@
 #ifndef FUZZY_FUZZYEXPRESSIONFACTORY_H_
 #define FUZZY_FUZZYEXPRESSIONFACTORY_H_
 
+#include "../core/ExpressionFactory.h"
 #include "MandaniDefuzz.h"
 #include "Operators.h"
 
 namespace fuzzy
 {
 	template<class T>
-	class FuzzyExpressionFactory
+	class FuzzyExpressionFactory : public core::ExpressionFactory<T>
 	{
 	public:
 		FuzzyExpressionFactory(Not<T>*,And<T>*,Or<T>*,Then<T>*,Agg<T>*,MandaniDefuzz<T>*);
