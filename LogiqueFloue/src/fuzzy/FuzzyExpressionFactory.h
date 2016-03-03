@@ -91,6 +91,7 @@ namespace fuzzy
 		return newBinary(&aggE,l,r);
 	}
 
+
 	template<class T>
 	core::Expression<T>* FuzzyExpressionFactory<T>::newDefuzz(core::Expression<T>* l,core::Expression<T>* r)
 	{
