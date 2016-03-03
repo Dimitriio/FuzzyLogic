@@ -10,6 +10,7 @@
 
 #include "../core/BinaryExpression.h"
 #include "../core/Expression.h"
+#include "../core/UnaryExpression.h"
 
 namespace fuzzy
 {
@@ -20,13 +21,8 @@ namespace fuzzy
 		Agg(){};
 		virtual ~Agg(){};
 
-		virtual T evaluate(core::Expression<T>*,core::Expression<T>*)const;
+		virtual T evaluate(core::Expression<T>*,core::Expression<T>*)const = 0;
 	};
-
-	template<class T>
-	T Agg<T>::evaluate(core::Expression<T>* l,core::Expression<T>* r) const
-	{
-	}
 
 	template<class T>
 	class And : public core::BinaryExpression<T>
@@ -35,13 +31,8 @@ namespace fuzzy
 		And(){};
 		virtual ~And(){};
 
-		virtual T evaluate(core::Expression<T>*,core::Expression<T>*) const;
+		virtual T evaluate(core::Expression<T>*,core::Expression<T>*) const = 0;
 	};
-
-	template<class T>
-	T  And<T>::evaluate(core::Expression<T>* l,core::Expression<T>* r) const
-	{
-	}
 
 	template<class T>
 	class Is : public core::UnaryExpression<T>
@@ -50,13 +41,8 @@ namespace fuzzy
 		Is(){};
 		virtual ~Is(){};
 
-		virtual T evaluate(core::Expression<T>*) const;
+		virtual T evaluate(core::Expression<T>*) const = 0;
 	};
-
-	template<class T>
-	T  Is<T>::evaluate(core::Expression<T>* l) const
-	{
-	}
 
 	template<class T>
 	class Not : public core::UnaryExpression<T>
@@ -65,13 +51,8 @@ namespace fuzzy
 		Not(){};
 		virtual ~Not(){};
 
-		virtual T evaluate(core::Expression<T>*) const;
+		virtual T evaluate(core::Expression<T>*) const = 0;
 	};
-
-	template<class T>
-	T  Not<T>::evaluate(core::Expression<T>* l) const
-	{
-	}
 
 	template<class T>
 	class Or : public core::BinaryExpression<T>
@@ -80,13 +61,8 @@ namespace fuzzy
 		Or(){};
 		virtual ~Or(){};
 
-		virtual T evaluate(core::Expression<T>*,core::Expression<T>*) const;
+		virtual T evaluate(core::Expression<T>*,core::Expression<T>*) const = 0;
 	};
-
-	template<class T>
-	T Or<T>::evaluate(core::Expression<T>* l,core::Expression<T>* r) const
-	{
-	}
 
 	template<class T>
 	class Then : public core::BinaryExpression<T>
@@ -95,13 +71,8 @@ namespace fuzzy
 		Then(){};
 		virtual ~Then(){};
 
-		virtual T evaluate(core::Expression<T>*,core::Expression<T>*) const;
+		virtual T evaluate(core::Expression<T>*,core::Expression<T>*) const = 0;
 	};
-
-	template<class T>
-	T Then<T>::evaluate(core::Expression<T>* l,core::Expression<T>* r) const
-	{
-	}
 }
 
 #endif /* FUZZY_OPERATORS_H_ */
