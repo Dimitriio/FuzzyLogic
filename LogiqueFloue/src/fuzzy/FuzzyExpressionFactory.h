@@ -70,81 +70,85 @@ namespace fuzzy
 	template<class T>
 	core::Expression<T>* FuzzyExpressionFactory<T>::newAnd(core::Expression<T>* l,core::Expression<T>* r)
 	{
-		return newBinary(&andE,l,r);
+		return this->newBinary(&andE,l,r);
 	}
 
 	template<class T>
 	core::Expression<T>* FuzzyExpressionFactory<T>::newOr(core::Expression<T>* l,core::Expression<T>* r)
 	{
-		return newBinary(&orE,l,r);
+		return this->newBinary(&orE,l,r);
 	}
 
 	template<class T>
 	core::Expression<T>* FuzzyExpressionFactory<T>::newThen(core::Expression<T>* l,core::Expression<T>* r)
 	{
-		return newBinary((core::BinaryExpression<T>*)&thenE,l,r);
+		return this->newBinary(&thenE,l,r);
 	}
 
 	template<class T>
 	core::Expression<T>* FuzzyExpressionFactory<T>::newAgg(core::Expression<T>* l,core::Expression<T>* r)
 	{
-		return newBinary(&aggE,l,r);
+		return this->newBinary(&aggE,l,r);
 	}
-
 
 	template<class T>
 	core::Expression<T>* FuzzyExpressionFactory<T>::newDefuzz(core::Expression<T>* l,core::Expression<T>* r)
 	{
-		return newBinary(&defuzzE,l,r);
+		return this->newBinary(&defuzzE,l,r);
 	}
 
 	template<class T>
 	core::Expression<T>* FuzzyExpressionFactory<T>::newNot(core::Expression<T>* o)
 	{
-		return newUnary(&notE,o);
+		return this->newUnary(&notE,o);
 	}
 
 	template<class T>
 	core::Expression<T>* FuzzyExpressionFactory<T>::newIs(Is<T>* ope,core::Expression<T>* _operand)
 	{
-		return newUnary(ope, _operand);
+		return this->newUnary(ope, _operand);
 	}
 
 	template<class T>
 	void FuzzyExpressionFactory<T>::changeAnd(And<T>* _and)
 	{
-		andE->setTarget(_and);
+		andE.setTarget(_and);
 	}
 
 	template<class T>
 	void FuzzyExpressionFactory<T>::changeOr(Or<T>* _or)
 	{
-		orE->setTarget(_or);
+		orE.setTarget(_or);
 	}
 
 	template<class T>
 	void FuzzyExpressionFactory<T>::changeThen(Then<T>* _then)
 	{
-		thenE->setTarget(_then);
+		thenE.setTarget(_then);
 	}
 
 	template<class T>
 	void FuzzyExpressionFactory<T>::changeAgg(Agg<T>* _agg)
 	{
-		aggE->setTarget(_agg);
+		aggE.setTarget(_agg);
 	}
 
 	template<class T>
 	void FuzzyExpressionFactory<T>::changeDefuzz(MandaniDefuzz<T>* _defuzz)
 	{
-		defuzzE->setTarget(_defuzz);
+		defuzzE.setTarget(_defuzz);
 	}
 
 	template<class T>
 	void FuzzyExpressionFactory<T>::changeNot(Not<T>* _not)
 	{
-		notE->setTarget(_not);
+		notE.setTarget(_not);
 	}
 }
 
 #endif /* FUZZY_FUZZYEXPRESSIONFACTORY_H_ */
+
+
+
+
+

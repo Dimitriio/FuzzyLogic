@@ -46,7 +46,7 @@ namespace core
 	template<class T>
 	Expression<T>* ExpressionFactory<T>::hold(Expression<T>* expression)
 	{
-		memory = expression;
+		*memory = *expression;
 		return expression;
 	}
 

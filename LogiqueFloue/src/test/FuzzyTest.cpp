@@ -120,7 +120,7 @@ void testIsTriangle()
 }
 
 int main() {
-	testValueModel();
+	/*testValueModel();
 	testAndMin();
 	testAndMult();
 	testOrMax();
@@ -130,6 +130,6 @@ int main() {
 	testAggMax();
 	testAggPlus();
 	testNotMinus1();
-	testIsTriangle();
+	testIsTriangle();*/
 	return 0;
 }
