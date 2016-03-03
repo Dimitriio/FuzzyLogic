@@ -42,66 +42,65 @@ namespace fuzzy
 		void changeNot(Not<T>*);
 
 	private:
-		core::UnaryShadowExpression<T>* notE;
-		core::BinaryShadowExpression<T>* andE;
-		core::BinaryShadowExpression<T>* orE;
-		core::BinaryShadowExpression<T>* thenE;
-		core::BinaryShadowExpression<T>* aggE;
-		core::BinaryShadowExpression<T>* defuzzE;
+		core::UnaryShadowExpression<T> notE;
+		core::BinaryShadowExpression<T> andE;
+		core::BinaryShadowExpression<T> orE;
+		core::BinaryShadowExpression<T> thenE;
+		core::BinaryShadowExpression<T> aggE;
+		core::BinaryShadowExpression<T> defuzzE;
 	};
 
 	template<class T>
 	FuzzyExpressionFactory<T>::FuzzyExpressionFactory(Not<T>* _not,And<T>* _and,Or<T>* _or,
 			Then<T>* _then,Agg<T>* _agg,MandaniDefuzz<T>* _defuzz):
-			notE(new core::UnaryShadowExpression<T>(_not)),
-			andE(new core::BinaryShadowExpression<T>(_and)),
-			orE(new core::BinaryShadowExpression<T>(_or)),
-			thenE(new core::BinaryShadowExpression<T>(_then)),
-			aggE(new core::BinaryShadowExpression<T>(_agg)),
-			defuzzE(new core::BinaryShadowExpression<T>(_defuzz))
+			notE(_not),
+			andE(_and),
+			orE(_or),
+			thenE(_then),
+			aggE(_agg),
+			defuzzE(_defuzz)
 	{
 	}
 
 	template<class T>
 	FuzzyExpressionFactory<T>::~FuzzyExpressionFactory()
 	{
-		delete notE,andE,orE,thenE,aggE,defuzzE;
 	}
 
 	template<class T>
 	core::Expression<T>* FuzzyExpressionFactory<T>::newAnd(core::Expression<T>* l,core::Expression<T>* r)
 	{
-		return newBinary(andE,l,r);
+		return newBinary(&andE,l,r);
 	}
 
 	template<class T>
 	core::Expression<T>* FuzzyExpressionFactory<T>::newOr(core::Expression<T>* l,core::Expression<T>* r)
 	{
-		return newBinary(orE,l,r);
+		return newBinary(&orE,l,r);
 	}
 
 	template<class T>
 	core::Expression<T>* FuzzyExpressionFactory<T>::newThen(core::Expression<T>* l,core::Expression<T>* r)
 	{
-		return newBinary(thenE,l,r);
+		return newBinary((core::BinaryExpression<T>*)&thenE,l,r);
 	}
 
 	template<class T>
 	core::Expression<T>* FuzzyExpressionFactory<T>::newAgg(core::Expression<T>* l,core::Expression<T>* r)
 	{
-		return newBinary(aggE,l,r);
+		return newBinary(&aggE,l,r);
 	}
 
 	template<class T>
 	core::Expression<T>* FuzzyExpressionFactory<T>::newDefuzz(core::Expression<T>* l,core::Expression<T>* r)
 	{
-		return newBinary(defuzzE,l,r);
+		return newBinary(&defuzzE,l,r);
 	}
 
 	template<class T>
 	core::Expression<T>* FuzzyExpressionFactory<T>::newNot(core::Expression<T>* o)
 	{
-		return newUnary(notE,o);
+		return newUnary(&notE,o);
 	}
 
 	template<class T>
