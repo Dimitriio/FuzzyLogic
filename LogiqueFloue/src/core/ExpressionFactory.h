@@ -8,6 +8,12 @@
 #ifndef CORE_EXPRESSIONFACTORY_H_
 #define CORE_EXPRESSIONFACTORY_H_
 
+#include "BinaryExpression.h"
+#include "BinaryExpressionModel.h"
+#include "Expression.h"
+#include "UnaryExpression.h"
+#include "UnaryExpressionModel.h"
+
 namespace core
 {
 	template<class T>
@@ -17,9 +23,9 @@ namespace core
 		ExpressionFactory();
 		~ExpressionFactory();
 
-		Expression<T> hold(Expression<T>);
-		Expression<T> newUnary(UnaryExpression<T>,Expression<T>);
-		Expression<T> newBinary(BinaryExpression<T>,Expression<T>,Expression<T>);
+		Expression<T>* hold(Expression<T>*);
+		Expression<T>* newUnary(UnaryExpression<T>*,Expression<T>*);
+		Expression<T>* newBinary(BinaryExpression<T>*,Expression<T>*,Expression<T>*);
 
 	private:
 		Expression<T>* memory;
@@ -38,21 +44,21 @@ namespace core
 	}
 
 	template<class T>
-	Expression<T> ExpressionFactory<T>::hold(Expression<T>	expression)
+	Expression<T>* ExpressionFactory<T>::hold(Expression<T>* expression)
 	{
-		*memory = expression;
+		memory = expression;
 		return expression;
 	}
 
 	template<class T>
-	Expression<T> ExpressionFactory<T>::newUnary(UnaryExpression<T> ope, Expression<T> o)
+	Expression<T>* ExpressionFactory<T>::newUnary(UnaryExpression<T>* ope, Expression<T>* o)
 	{
 		return hold(new UnaryExpressionModel<T>(o, ope));
 	}
 
 	template<class T>
-	Expression<T> ExpressionFactory<T>::newBinary(BinaryExpression<T> ope,
-			Expression<T> l, Expression<T> r)
+	Expression<T>* ExpressionFactory<T>::newBinary(BinaryExpression<T>* ope,
+			Expression<T>* l, Expression<T>* r)
 	{
 		return hold(new BinaryExpressionModel<T>(l,r,ope));
 	}
