@@ -39,7 +39,7 @@ namespace fuzzy
 
 		T mass = 0;
 		T sum_xy = 0;
-		for(int i = min; i < max; i += step)
+		for(int i = 0; i < x.size(); i++)
 		{
 			sum_xy += x[i]*y[i];
 			mass += y[i];

@@ -19,7 +19,7 @@
  */
 
 
-/*void factoryTest()
+void factoryTest()
 {
 	//operators
 	using namespace core;
@@ -68,7 +68,7 @@
 			);
 
 	//defuzzification
-	Expression<double> *system = f.newDefuzz(&tips, r, 0, 25, 1);
+	/*Expression<double> *system = f.newDefuzz(&tips, r, 0, 25, 1);
 
 
 	//apply input
@@ -80,6 +80,6 @@
 		service.setValue(s);
 		std::cout << "tips -> " << system->evaluate() << std::endl;
 	}
-
-}*/
+*/
+}
 
