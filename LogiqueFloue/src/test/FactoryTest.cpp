@@ -5,6 +5,7 @@
 #include "../fuzzy/AggMax.h"
 #include "../fuzzy/AndMin.h"
 #include "../fuzzy/CogDefuzz.h"
+#include "../core/BinaryShadowExpression.h"
 #include "../fuzzy/FuzzyExpressionFactory.h"
 #include "../fuzzy/IsTriangle.h"
 #include "../fuzzy/NotMinus1.h"
@@ -24,6 +25,7 @@ void factoryTest()
 	//operators
 	using namespace core;
 	using namespace fuzzy;
+
 	NotMinus1<double> opNot;
 	AndMin<double> opAnd;
 	OrMax<double> opOr;
@@ -79,7 +81,7 @@ void factoryTest()
 		std::cin >> s;
 		service.setValue(s);
 		std::cout << "tips -> " << system->evaluate() << std::endl;
-	}
-*/
+	}*/
+
 }
 
