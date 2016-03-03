@@ -23,8 +23,6 @@
 #include "../fuzzy/ThenMin.h"
 #include "../fuzzy/ThenMult.h"
 
-
-
 void testValueModel()
 {
 	core::ValueModel<float> vm(0.1f);

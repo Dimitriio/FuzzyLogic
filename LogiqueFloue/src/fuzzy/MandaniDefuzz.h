@@ -9,21 +9,21 @@
 #define FUZZY_MANDANIDEFUZZ_H_
 
 #include "../core/BinaryExpression.h"
+#include "../core/Evaluator.h"
 
 namespace fuzzy
 {
-
 	template <class T>
-	class MandaniDefuzz : core::BinaryExpression<T>
+	class MandaniDefuzz : public core::BinaryExpression<T>
 	{
 	public:
 		MandaniDefuzz(const T&, const T&, const T&);
 		virtual ~MandaniDefuzz() {};
 
-		T evaluate(Expression<T>*, Expression<T>*) const;
-		virtual T defuzz(const core::Evaluator::Shape&) const = 0;
+		T evaluate(core::Expression<T>*, core::Expression<T>*) const;
+		virtual T defuzz(const typename core::Evaluator<T>::Shape&) const = 0;
 
-	private:
+	protected:
 		T min, max, step;
 	};
 
@@ -31,13 +31,12 @@ namespace fuzzy
 	MandaniDefuzz<T>::MandaniDefuzz(const T& _min, const T& _max, const T& _step) :
 	min(_min), max(_max), step(_step)
 	{
-
 	}
 
 	template <class T>
-	T MandaniDefuzz<T>::evaluate(Expression<T> *s, Expression<T> *f) const
+	T MandaniDefuzz<T>::evaluate(core::Expression<T> *s, core::Expression<T> *f) const
 	{
-		return defuzz(core::Evaluator<T>::BuildShape(min, max, step, (ValueModel<T>*)s, f));
+		return defuzz(core::Evaluator<T>::BuildShape(min, max, step, (core::ValueModel<T>*)s, f));
 	}
 }
 
