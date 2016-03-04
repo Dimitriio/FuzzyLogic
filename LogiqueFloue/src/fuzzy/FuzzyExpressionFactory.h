@@ -30,7 +30,7 @@ namespace fuzzy
 		core::Expression<T>* newOr(core::Expression<T>*,core::Expression<T>*);
 		core::Expression<T>* newThen(core::Expression<T>*,core::Expression<T>*);
 		core::Expression<T>* newAgg(core::Expression<T>*,core::Expression<T>*);
-		core::Expression<T>* newDefuzz(core::Expression<T>*,core::Expression<T>*);
+		core::Expression<T>* newDefuzz(core::Expression<T>*,core::Expression<T>*,const T&, const T&,const T&);
 		core::Expression<T>* newNot(core::Expression<T>*);
 		core::Expression<T>* newIs(Is<T>*,core::Expression<T>*);
 
@@ -92,8 +92,9 @@ namespace fuzzy
 	}
 
 	template<class T>
-	core::Expression<T>* FuzzyExpressionFactory<T>::newDefuzz(core::Expression<T>* l,core::Expression<T>* r)
+	core::Expression<T>* FuzzyExpressionFactory<T>::newDefuzz(core::Expression<T>* l,core::Expression<T>* r,const T& min,const T& max, const T& step)
 	{
+		((MandaniDefuzz<T>*)defuzzE.getTarget())->setValues(min,max,step);
 		return this->newBinary(&defuzzE,l,r);
 	}
 

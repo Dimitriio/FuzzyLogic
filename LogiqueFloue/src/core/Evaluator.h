@@ -15,18 +15,18 @@ namespace core
 	{
 	public: 
 		typedef std::pair<std::vector <T>,std::vector<T>> Shape;
-		static Shape BuildShape(const T& , const T&, const T&, ValueModel<T>*, UnaryExpression<T>*);
+		static Shape BuildShape(const T& , const T&, const T&, ValueModel<T>*,Expression<T>*);
 		static std::ostream& PrintShape(std::ostream&, const Shape&);
 	};
 
 	template <class T>
-	typename Evaluator<T>::Shape Evaluator<T>::BuildShape(const T& min ,const T& max,const T& step ,ValueModel<T>*v, UnaryExpression<T>*f)
+	typename Evaluator<T>::Shape Evaluator<T>::BuildShape(const T& min ,const T& max,const T& step ,ValueModel<T>*v, Expression<T>*f)
 	{
 		std::vector<T> x,y;
 		for(T i=min;i<=max;i+=step)
 		{
 			v->setValue(i);
-			y.push_back(f->evaluate(v));
+			y.push_back(f->evaluate());
 			x.push_back(i);
 		}
 		return Shape(x,y);

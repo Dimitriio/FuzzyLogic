@@ -20,7 +20,7 @@
  */
 
 
-void factoryTest()
+void factoryTest1()
 {
 	//operators
 	using namespace core;
@@ -31,7 +31,7 @@ void factoryTest()
 	OrMax<double> opOr;
 	AggMax<double> opAgg;
 	ThenMin<double> opThen;
-	CogDefuzz<double> opDefuzz(0,25,1);
+	CogDefuzz<double> opDefuzz;
 
 	//fuzzy expression factory
 	FuzzyExpressionFactory<double> f(&opNot,&opAnd,&opOr,&opThen,&opAgg,&opDefuzz);
@@ -70,7 +70,7 @@ void factoryTest()
 			);
 
 	//defuzzification
-	/*Expression<double> *system = f.newDefuzz(&tips, r, 0, 25, 1);
+	Expression<double> *system = f.newDefuzz(&tips, r, 0.0, 25.0, 1.0);
 
 
 	//apply input
@@ -81,7 +81,7 @@ void factoryTest()
 		std::cin >> s;
 		service.setValue(s);
 		std::cout << "tips -> " << system->evaluate() << std::endl;
-	}*/
+	}
 
 }
 

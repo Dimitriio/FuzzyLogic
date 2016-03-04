@@ -19,15 +19,15 @@ namespace fuzzy
 	class CogDefuzz : public MandaniDefuzz<T>
 	{
 	public:
-		CogDefuzz(const T&, const T&, const T&);
+		CogDefuzz();
 		virtual ~CogDefuzz() {};
 
 		virtual T defuzz(const typename core::Evaluator<T>::Shape&) const;
 	};
 
 	template <class T>
-	CogDefuzz<T>::CogDefuzz(const T& _min, const T& _max, const T& _step):
-	MandaniDefuzz<T>(_min, _max, _step)
+	CogDefuzz<T>::CogDefuzz():
+	MandaniDefuzz<T>()
 	{
 	}
 
@@ -39,12 +39,11 @@ namespace fuzzy
 
 		T mass = 0;
 		T sum_xy = 0;
-		for(int i = 0; i < x.size(); i++)
+		for(unsigned int i = 0; i < x.size(); i++)
 		{
 			sum_xy += x[i]*y[i];
 			mass += y[i];
 		}
-
 		return sum_xy / mass;
 	}
 }

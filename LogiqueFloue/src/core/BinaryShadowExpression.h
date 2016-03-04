@@ -18,6 +18,7 @@ namespace core
 		virtual ~BinaryShadowExpression();
 
 		virtual void setTarget(BinaryExpression<T>*);
+		virtual BinaryExpression<T>* getTarget() const;
 
 		virtual T evaluate(Expression<T>*,Expression<T>*)const;
 
@@ -41,6 +42,12 @@ namespace core
 	void BinaryShadowExpression<T>::setTarget(BinaryExpression<T>* _target)
 	{
 		target = _target;
+	}
+
+	template<class T>
+	BinaryExpression<T>* BinaryShadowExpression<T>::getTarget() const
+	{
+		return target;
 	}
 
 	template<class T>
