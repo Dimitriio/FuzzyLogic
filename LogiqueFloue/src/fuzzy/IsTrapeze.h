@@ -16,7 +16,7 @@ namespace fuzzy
 	class IsTrapeze : public Is<T>
 	{
 	public:
-		IsTrapeze(const T&,const T&,const T&);
+		IsTrapeze(const T&,const T&);
 		virtual ~IsTrapeze() {};
 
 		virtual T evaluate(core::Expression<T>*) const;
@@ -26,13 +26,13 @@ namespace fuzzy
 	};
 
 	template<class T>
-	IsTrapeze<T>::IsTrapeze(const T& _startValue, const T& _min, const T& _max):
+	IsTrapeze<T>::IsTrapeze(const T& _min, const T& _max):
 	min(_min),max(_max)
 	{
 	}
 
 	template<class T>
-	T IsTrapeze<T>::evaluate(core::Expression<T>* expression) const
+	T IsTrapeze<T>::evaluate(core::Expression<T>* l) const
 	{
 		if(l != nullptr)
 		{
