@@ -22,19 +22,40 @@ namespace fuzzy
 		virtual T evaluate(core::Expression<T>*) const;
 
 	private:
-		T min,max,startValue;
+		T min,max;
 	};
 
 	template<class T>
 	IsTrapeze<T>::IsTrapeze(const T& _startValue, const T& _min, const T& _max):
-	startValue(_startValue),min(_min),max(_max)
+	min(_min),max(_max)
 	{
 	}
 
 	template<class T>
 	T IsTrapeze<T>::evaluate(core::Expression<T>* expression) const
 	{
-
+		if(l != nullptr)
+		{
+			T left = l->evaluate();
+			if(min < max)
+			{
+				if(left < min)
+					return 0;
+				else if(left > max)
+					return 1;
+				else
+					return (left-min)/(max-min);
+			}
+			else
+			{
+				if(left > min)
+					return 0;
+				else if(left < max)
+					return 1;
+				else
+					return -(left-max)/(max-mid);
+			}
+		}
 	}
 }
 

@@ -42,8 +42,7 @@ namespace fuzzy
 			if(left < min || left > max)
 				return 0;
 			else
-				return (left < mid) ? (left-min)/(mid-min)
-						: -(left-max)/(max-mid);
+				return (left < mid) ? (left-min)/(mid-min) : -(left-max)/(max-mid);
 		}
 	}
 }
