@@ -38,10 +38,9 @@ namespace fuzzy
 		if(l != nullptr)
 		{
 			T left = l->evaluate();
-			static const T inv_sqrt_2pi = 0.3989422804014327;
 			T a = (left - mean) / stddev;
 
-			return inv_sqrt_2pi / stddev * std::exp(-T(0.5) * a * a);
+			return std::exp(-T(0.5) * a * a);
 		}
 	}
 }

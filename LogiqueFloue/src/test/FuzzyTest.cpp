@@ -19,6 +19,9 @@
 #include "../fuzzy/AndMult.h"
 #include "../fuzzy/CogDefuzz.h"
 #include "../fuzzy/FuzzyExpressionFactory.h"
+#include "../fuzzy/IsCumulativeGaussian.h.h"
+#include "../fuzzy/IsGaussian.h"
+#include "../fuzzy/IsTrapeze.h"
 #include "../fuzzy/IsTriangle.h"
 #include "../fuzzy/NotMinus1.h"
 #include "../fuzzy/OrMax.h"
@@ -141,25 +144,31 @@ void factoryTest()
 	FuzzyExpressionFactory<double> f(&opNot,&opAnd,&opOr,&opThen,&opAgg,&opDefuzz);
 
 	//membership function
-	IsTriangle<double> poor(-5,0,5);
-	IsTriangle<double> good(0,5,10);
-	IsTriangle<double> excellent(5,10,15);
+	IsCumulativeGaussian<double> poor(2.5,1.5,3);
+	IsGaussian<double> good(5,1.5);
+	IsCumulativeGaussian<double> excellent(7.5,1.5,5);
 
-	IsTriangle<double> cheap(0,5,10);
-	IsTriangle<double> average(10,15,20);
-	IsTriangle<double> generous(20,25,30);
+	IsTrapeze<double> rancid(4.0,2.0);
+	IsTrapeze<double> delicious(6.0,8.0);
+
+	IsTriangle<double> cheap(0,4.17,8.33);
+	IsTriangle<double> average(8.33,12.5,16.67);
+	IsTriangle<double> generous(16.67,20.83,25);
 
 	//values
 
 	ValueModel<double> service(0.0);
-	ValueModel<double> food(0.0);
+	ValueModel<double> food(8.0);
 	ValueModel<double> tips(0.0);
 
 	Expression<double> *r =
 			f.newAgg(
 					f.newAgg(
 							f.newThen(
-									f.newIs(&poor,&service),
+									f.newOr(
+											f.newIs(&poor,&service),
+											f.newIs(&rancid,&food)
+									),
 									f.newIs(&cheap,&tips)
 							),
 							f.newThen(
@@ -167,8 +176,11 @@ void factoryTest()
 									f.newIs(&average,&tips)
 							)
 					),
-					f.newThen(
-							f.newIs(&excellent,&service),
+					f.newOr(
+							f.newThen(
+									f.newIs(&excellent,&service),
+									f.newIs(&delicious,&food)
+							),
 							f.newIs(&generous,&tips)
 					)
 			);
