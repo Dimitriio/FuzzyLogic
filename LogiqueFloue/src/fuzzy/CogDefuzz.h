@@ -11,7 +11,7 @@
 #include <vector>
 
 #include "../core/Evaluator.h"
-#include "MandaniDefuzz.h"
+#include "MamdaniDefuzz.h"
 
 namespace fuzzy
 {

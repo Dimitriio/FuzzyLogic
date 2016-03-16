@@ -12,7 +12,7 @@
 #include "../core/Expression.h"
 #include "../core/ExpressionFactory.h"
 #include "../core/UnaryShadowExpression.h"
-#include "MandaniDefuzz.h"
+#include "MamdaniDefuzz.h"
 #include "Operators.h"
 
 

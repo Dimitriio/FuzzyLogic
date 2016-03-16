@@ -5,8 +5,8 @@
  *      Author: Dimitri
  */
 
-#ifndef FUZZY_ISCUMULATIVEGAUSSIAN_H_H_
-#define FUZZY_ISCUMULATIVEGAUSSIAN_H_H_
+#ifndef FUZZY_ISCUMULATIVEGAUSSIAN_H_
+#define FUZZY_ISCUMULATIVEGAUSSIAN_H_
 
 #include <cmath>
 
@@ -47,4 +47,4 @@ namespace fuzzy
 		}
 	}
 }
-#endif /* FUZZY_ISCUMULATIVEGAUSSIAN_H_H_ */
+#endif /* FUZZY_ISCUMULATIVEGAUSSIAN_H_ */

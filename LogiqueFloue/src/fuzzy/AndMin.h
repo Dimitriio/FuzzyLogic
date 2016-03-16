@@ -11,7 +11,6 @@
 #include "../core/Expression.h"
 #include "Operators.h"
 
-
 namespace fuzzy
 {
 	template<class T>
