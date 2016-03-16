@@ -29,7 +29,6 @@
 #include "../fuzzy/ThenMin.h"
 #include "../fuzzy/ThenMult.h"
 
-#include "../fuzzy/Fuzzy.h"
 void testValueModel()
 {
 	core::ValueModel<float> vm(0.1f);
@@ -142,7 +141,7 @@ void factoryTest()
 	CogDefuzz<double> opDefuzz;
 
 	//fuzzy expression factory
-	_FuzzyExpressionFactory f(&opNot,&opAnd,&opOr,&opThen,&opAgg,&opDefuzz);
+	FuzzyExpressionFactory<double> f(&opNot,&opAnd,&opOr,&opThen,&opAgg,&opDefuzz);
 
 	//membership function
 	IsTriangle<double> tF(0.0,5.0,10.0);
