@@ -19,7 +19,7 @@
 #include "../fuzzy/AndMult.h"
 #include "../fuzzy/CogDefuzz.h"
 #include "../fuzzy/FuzzyExpressionFactory.h"
-#include "../fuzzy/IsCumulativeGaussian.h.h"
+#include "../fuzzy/IsCumulativeGaussian.h"
 #include "../fuzzy/IsGaussian.h"
 #include "../fuzzy/IsTrapeze.h"
 #include "../fuzzy/IsTriangle.h"
@@ -29,6 +29,7 @@
 #include "../fuzzy/ThenMin.h"
 #include "../fuzzy/ThenMult.h"
 
+#include "../fuzzy/Fuzzy.h"
 void testValueModel()
 {
 	core::ValueModel<float> vm(0.1f);
@@ -141,24 +142,21 @@ void factoryTest()
 	CogDefuzz<double> opDefuzz;
 
 	//fuzzy expression factory
-	FuzzyExpressionFactory<double> f(&opNot,&opAnd,&opOr,&opThen,&opAgg,&opDefuzz);
+	_FuzzyExpressionFactory f(&opNot,&opAnd,&opOr,&opThen,&opAgg,&opDefuzz);
 
 	//membership function
-	IsCumulativeGaussian<double> poor(2.5,1.5,3);
-	IsGaussian<double> good(5,1.5);
-	IsCumulativeGaussian<double> excellent(7.5,1.5,5);
+	IsTriangle<double> tF(0.0,5.0,10.0);
+	IsTriangle<double> tNR(5.0,10.0,15.0);
+	IsTriangle<double> tC(10.0,15.0,20.0);
 
-	IsTrapeze<double> rancid(4.0,2.0);
-	IsTrapeze<double> delicious(6.0,8.0);
-
-	IsTriangle<double> cheap(0,4.17,8.33);
-	IsTriangle<double> average(8.33,12.5,16.67);
-	IsTriangle<double> generous(16.67,20.83,25);
+	IsTriangle<double> dtF(-2.0,-1.0,0.0);
+	IsTriangle<double> dtZ(-1.0,0.0,1.0);
+	IsTriangle<double> dtC(0.0,-1.0,-2.0);
 
 	//values
 
-	ValueModel<double> service(0.0);
-	ValueModel<double> food(8.0);
+	ValueModel<double> temp(6.5);
+	ValueModel<double> dtemp(0.9);
 	ValueModel<double> tips(0.0);
 
 	Expression<double> *r =
@@ -166,27 +164,39 @@ void factoryTest()
 					f.newAgg(
 							f.newThen(
 									f.newOr(
-											f.newIs(&poor,&service),
-											f.newIs(&rancid,&food)
+											f.newIs(&tF,&temp),
+											f.newIs(&dtF,&dtemp)
 									),
-									f.newIs(&cheap,&tips)
+									f.newIs(&tC,&tips)
 							),
 							f.newThen(
-									f.newIs(&good,&service),
-									f.newIs(&average,&tips)
+									f.newOr(
+											f.newIs(&tF,&temp),
+											f.newIs(&dtZ,&dtemp)
+									),
+									f.newIs(&tC,&tips)
 							)
 					),
-					f.newOr(
+					f.newAgg(
 							f.newThen(
-									f.newIs(&excellent,&service),
-									f.newIs(&delicious,&food)
+									f.newOr(
+											f.newIs(&tNR,&temp),
+											f.newIs(&dtF,&dtemp)
+									),
+									f.newIs(&tC,&tips)
 							),
-							f.newIs(&generous,&tips)
+							f.newThen(
+									f.newOr(
+											f.newIs(&tNR,&temp),
+											f.newIs(&dtZ,&dtemp)
+									),
+									f.newIs(&tNR,&tips)
+							)
 					)
 			);
 
 	//defuzzification
-	Expression<double> *system = f.newDefuzz(&tips, r, 0.0, 25.0, 1.0);
+	Expression<double> *system = f.newDefuzz(&tips, r, 0.0, 20.0, 1.0);
 
 
 	//apply input
@@ -195,7 +205,7 @@ void factoryTest()
 	{
 		std::cout << "service : ";
 		std::cin >> s;
-		service.setValue(s);
+		dtemp.setValue(s);
 		std::cout << "tips -> " << system->evaluate() << std::endl;
 	}
 }
