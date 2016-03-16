@@ -29,20 +29,20 @@
 
 using namespace fuzzy;
 
-typedef AggMax<NUMBER> 	_AggMax;
-typedef AggPlus<NUMBER> _AggPlus;
-typedef AndMin<NUMBER> _AndMin;
-typedef CogDefuzz<NUMBER> _CogDefuzz;
-typedef FuzzyExpressionFactory<NUMBER> _FuzzyExpressionFactory;
-typedef IsCumulativeGaussian<NUMBER> _IsCumulativeGaussian;
-typedef IsGaussian<NUMBER> _IsGaussian;
-typedef IsTrapeze<NUMBER> _IsTrapeze;
-typedef IsTriangle<NUMBER> _IsTriangle;
-typedef MandaniDefuzz<NUMBER> _MandaniDefuzz;
-typedef NotMinus1<NUMBER> _NotMinus1;
-typedef OrMax<NUMBER> _OrMax;
-typedef OrPlus<NUMBER> _OrPlus;
-typedef ThenMin<NUMBER> _ThenMin;
-typedef ThenMult<NUMBER> _ThenMult;
+typedef AggMax<NUMBER> aggMax;
+typedef AggPlus<NUMBER> aggPlus;
+typedef AndMin<NUMBER> andMin;
+typedef CogDefuzz<NUMBER> cogDefuzz;
+typedef FuzzyExpressionFactory<NUMBER> fuzzyExpressionFactory;
+typedef IsCumulativeGaussian<NUMBER> isCumulativeGaussian;
+typedef IsGaussian<NUMBER> isGaussian;
+typedef IsTrapeze<NUMBER> isTrapeze;
+typedef IsTriangle<NUMBER> isTriangle;
+typedef MandaniDefuzz<NUMBER> mandaniDefuzz;
+typedef NotMinus1<NUMBER> notMinus1;
+typedef OrMax<NUMBER> orMax;
+typedef OrPlus<NUMBER> orPlus;
+typedef ThenMin<NUMBER> thenMin;
+typedef ThenMult<NUMBER> thenMult;
 
 #endif /* FUZZY_FUZZY_H_ */
