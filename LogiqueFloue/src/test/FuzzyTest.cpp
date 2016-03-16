@@ -19,7 +19,7 @@
 #include "../fuzzy/AndMult.h"
 #include "../fuzzy/CogDefuzz.h"
 #include "../fuzzy/FuzzyExpressionFactory.h"
-#include "../fuzzy/IsCumulativeGaussian.h.h"
+#include "../fuzzy/IsCumulativeGaussian.h"
 #include "../fuzzy/IsGaussian.h"
 #include "../fuzzy/IsTrapeze.h"
 #include "../fuzzy/IsTriangle.h"
@@ -29,6 +29,7 @@
 #include "../fuzzy/ThenMin.h"
 #include "../fuzzy/ThenMult.h"
 
+#include "../fuzzy/Fuzzy.h"
 void testValueModel()
 {
 	core::ValueModel<float> vm(0.1f);
@@ -141,7 +142,7 @@ void factoryTest()
 	CogDefuzz<double> opDefuzz;
 
 	//fuzzy expression factory
-	FuzzyExpressionFactory<double> f(&opNot,&opAnd,&opOr,&opThen,&opAgg,&opDefuzz);
+	_FuzzyExpressionFactory f(&opNot,&opAnd,&opOr,&opThen,&opAgg,&opDefuzz);
 
 	//membership function
 	IsCumulativeGaussian<double> poor(2.5,1.5,3);

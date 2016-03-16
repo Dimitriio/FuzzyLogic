@@ -5,8 +5,8 @@
  *      Author: Szymanski
  */
 
-#ifndef FUZZY_MANDANIDEFUZZ_H_
-#define FUZZY_MANDANIDEFUZZ_H_
+#ifndef FUZZY_MAMDANIDEFUZZ_H_
+#define FUZZY_MAMDANIDEFUZZ_H_
 
 #include "../core/BinaryExpression.h"
 #include "../core/Evaluator.h"
@@ -50,4 +50,4 @@ namespace fuzzy
 	}
 }
 
-#endif /* FUZZY_MANDANIDEFUZZ_H_ */
+#endif /* FUZZY_MAMDANIDEFUZZ_H_ */
