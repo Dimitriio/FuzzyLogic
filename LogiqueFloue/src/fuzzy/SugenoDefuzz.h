@@ -22,7 +22,12 @@ namespace fuzzy {
 	template <class T>
 	T SugenoDefuzz<T>::evaluate(Expression<T>** operands) const
 	{
+		T numerator, denominator = 0;
 
+		for(int i = 0; i < ; i++)
+		{
+
+		}
 	}
 }
 

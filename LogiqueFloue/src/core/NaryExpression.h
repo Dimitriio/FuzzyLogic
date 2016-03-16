@@ -14,7 +14,7 @@ namespace core {
 	public:
 		virtual ~NaryExpression();
 
-		virtual T evaluate(Expression<T>**) const =0;
+		virtual T evaluate(std::vector<Expression<T>*>*) const =0;
 	};
 }
 
