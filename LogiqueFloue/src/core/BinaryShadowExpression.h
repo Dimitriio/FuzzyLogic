@@ -8,6 +8,13 @@
 #ifndef CORE_BINARYSHADOWEXPRESSION_H_
 #define CORE_BINARYSHADOWEXPRESSION_H_
 
+#include "BinaryExpression.h"
+#include "BinaryExpressionModel.h"
+#include "Expression.h"
+#include "NullPtrException.h"
+
+#include <typeinfo>
+
 namespace core
 {
 	template<class T>
@@ -55,6 +62,7 @@ namespace core
 	{
 		if(target != nullptr)
 			return target->evaluate(l,r);
+		throw NullPtrException(typeid(BinaryShadowExpression).name());
 	}
 }
 #endif /* CORE_BINARYSHADOWEXPRESSION_H_ */

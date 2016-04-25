@@ -11,6 +11,8 @@
 
 #include "BinaryExpression.h"
 #include "Expression.h"
+#include "NullPtrException.h"
+#include <typeinfo>
 
 namespace core
 {
@@ -44,6 +46,7 @@ namespace core
 	{
 		if(left != nullptr && right != nullptr)
 			return evaluate(left, right);
+		throw NullPtrException(typeid(BinaryExpressionModel).name());
 	}
 
 	template<class T>
@@ -51,6 +54,7 @@ namespace core
 	{
 		if(_operator != nullptr)
 			return _operator->evaluate(l, r);
+		throw NullPtrException(typeid(BinaryExpressionModel).name());
 	}
 }
 #endif

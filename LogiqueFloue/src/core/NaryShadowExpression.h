@@ -8,6 +8,13 @@
 #ifndef CORE_NARYSHADOWEXPRESSION_H_
 #define CORE_NARYSHADOWEXPRESSION_H_
 
+#include <typeinfo>
+#include <vector>
+
+#include "Expression.h"
+#include "NaryExpression.h"
+#include "NullPtrException.h"
+
 namespace core {
 	template<class T>
 	class NaryShadowExpression : public NaryExpression<T>{
@@ -36,7 +43,7 @@ namespace core {
 	T NaryShadowExpression<T>::evaluate(std::vector<Expression<T>*>* operands) const {
 		if(target != nullptr)
 			return target->evaluate(operands);
-		throw;
+		throw NullPtrException(typeid(NaryShadowExpression).name());
 	}
 }
 

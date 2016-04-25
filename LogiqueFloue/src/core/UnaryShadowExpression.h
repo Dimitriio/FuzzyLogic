@@ -8,6 +8,12 @@
 #ifndef CORE_UNARYSHADOWEXPRESSION_H_
 #define CORE_UNARYSHADOWEXPRESSION_H_
 
+#include <typeinfo>
+
+#include "Expression.h"
+#include "NullPtrException.h"
+#include "UnaryExpression.h"
+
 namespace core
 {
 	template<class T>
@@ -48,6 +54,7 @@ namespace core
 	{
 		if(target != nullptr)
 			return target->evaluate(o);
+		throw NullPtrException(typeid(UnaryShadowExpression).name());
 	}
 }
 

@@ -11,6 +11,7 @@
 
 #include "../core/BinaryExpressionModel.h"
 #include "../core/Expression.h"
+#include "../core/NullPtrException.h"
 #include "../core/UnaryExpressionModel.h"
 #include "../core/ValueModel.h"
 #include "../fuzzy/AggMax.h"
@@ -125,7 +126,23 @@ void testIsTriangle()
 	assert(uem->evaluate()-0.25<4e-6);
 }
 
-
+void testNullptrException()
+{
+	core::ValueModel<float>* r = new core::ValueModel<float>(0.9f);
+	fuzzy::AndMin<float>* am = new fuzzy::AndMin<float>();
+	core::BinaryExpressionModel<float>* bem = new core::BinaryExpressionModel<float>(nullptr, r, am);
+	try{
+		bem->evaluate();
+	} catch (const NullPtrException &e) {
+		assert(true);
+	}
+	bem = new core::BinaryExpressionModel<float>(r, nullptr, am);
+	try{
+		bem->evaluate();
+	} catch (const NullPtrException &e) {
+		assert(true);
+	}
+}
 
 void factoryTest()
 {
@@ -212,6 +229,7 @@ int main() {
 	testAggPlus();
 	testNotMinus1();
 	testIsTriangle();
+	testNullptrException();
 	factoryTest();
 	return 0;
 }
