@@ -43,7 +43,7 @@ namespace core {
 	T NaryShadowExpression<T>::evaluate(std::vector<Expression<T>*>* operands) const {
 		if(target != nullptr)
 			return target->evaluate(operands);
-		throw NullPtrException(typeid(NaryShadowExpression).name());
+		throw NullPtrException();
 	}
 }
 

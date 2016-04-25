@@ -14,26 +14,21 @@
 
 class NullPtrException: public std::exception
 {
-private:
-	std::string msg;
-
 public:
-	NullPtrException(std::string);
+	NullPtrException();
 	virtual ~NullPtrException() {};
 	virtual const char* what() const throw();
 };
 
-NullPtrException::NullPtrException(std::string className)
+NullPtrException::NullPtrException()
 {
-	std::ostringstream oss;
-	oss << "Null Pointer in class : " << className;
-	msg = oss.str();
 }
 
 
 const char* NullPtrException::what() const throw()
 {
-
-	return msg.c_str();
+	std::string str = "NullPtrException : ";
+	str.append(std::exception::what());
+	return str.c_str();
 }
 #endif /* CORE_NULLPTREXCEPTION_H_ */

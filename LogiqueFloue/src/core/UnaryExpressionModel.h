@@ -41,7 +41,7 @@ namespace core
 	{
 		if (operand != nullptr)
 			return evaluate(operand);
-		throw NullPtrException(typeid(UnaryExpressionModel).name());
+		throw NullPtrException();
 	}
 
 	template<class T>
@@ -49,7 +49,7 @@ namespace core
 	{
 		if(_operator != nullptr)
 			return _operator->evaluate(o);
-		throw NullPtrException(typeid(UnaryExpressionModel).name());
+		throw NullPtrException();
 	}
 }
 #endif /* CORE_UNARYEXPRESSIONMODEL_H_ */

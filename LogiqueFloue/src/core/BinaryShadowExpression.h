@@ -62,7 +62,7 @@ namespace core
 	{
 		if(target != nullptr)
 			return target->evaluate(l,r);
-		throw NullPtrException(typeid(BinaryShadowExpression).name());
+		throw NullPtrException();
 	}
 }
 #endif /* CORE_BINARYSHADOWEXPRESSION_H_ */

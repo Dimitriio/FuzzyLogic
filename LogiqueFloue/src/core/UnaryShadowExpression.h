@@ -54,7 +54,7 @@ namespace core
 	{
 		if(target != nullptr)
 			return target->evaluate(o);
-		throw NullPtrException(typeid(UnaryShadowExpression).name());
+		throw NullPtrException();
 	}
 }
 
