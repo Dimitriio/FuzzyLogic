@@ -22,6 +22,9 @@ namespace core {
 		NaryShadowExpression(NaryExpression<T>*);
 		virtual ~NaryShadowExpression();
 
+		virtual void setTarget(NaryExpression<T>*);
+		virtual NaryExpression<T>* getTarget() const;
+
 		virtual T evaluate(std::vector<Expression<T>*>*) const;
 
 
@@ -38,6 +41,18 @@ namespace core {
 	template<class T>
 	NaryShadowExpression<T>::~NaryShadowExpression(){
 		delete target;
+	}
+
+	template<class T>
+	void NaryShadowExpression<T>::setTarget(NaryExpression<T>* n)
+	{
+		target = n;
+	}
+
+	template<class T>
+	NaryExpression<T>* NaryShadowExpression<T>::getTarget() const
+	{
+		return target;
 	}
 
 	template<class T>
