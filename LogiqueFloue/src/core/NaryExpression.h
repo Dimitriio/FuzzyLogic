@@ -8,14 +8,17 @@
 #ifndef CORE_NARYEXPRESSION_H_
 #define CORE_NARYEXPRESSION_H_
 
+#include <vector>
+
 namespace core {
 	template<class T>
-	class NaryExpression {
+	class NaryExpression
+	{
 	public:
 		NaryExpression() {};
 		virtual ~NaryExpression() {};
 
-		virtual T evaluate(std::vector<Expression<T>*>*) const =0;
+		virtual T evaluate(std::vector<Expression<T>*>*) const = 0;
 	};
 }
 

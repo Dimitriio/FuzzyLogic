@@ -8,8 +8,7 @@
 #ifndef FUZZY_SUGENODEFUZZ_H_
 #define FUZZY_SUGENODEFUZZ_H_
 
-#include "../core/NaryExpression.h"
-#include <vector>
+#include "NaryExpression.h"
 
 namespace fuzzy {
 	template <class T>
@@ -19,13 +18,13 @@ namespace fuzzy {
 		SugenoDefuzz() {};
 		virtual ~SugenoDefuzz() {};
 
-		virtual T evaluate(std::vector<Expression<T>*>*) const;
+		T evaluate(std::vector<Expression<T>*>*) const;
 	};
 
 	template <class T>
 	T SugenoDefuzz<T>::evaluate(std::vector<Expression<T>*>* operands) const
 	{
-		T numerator, denominator = 0;
+		T num, denum = 0;
 
 		for(core::Expression<T>* t : operands)
 		{
