@@ -19,19 +19,19 @@ namespace core {
 	template<class T>
 	class NaryExpressionModel : public Expression<T>,NaryExpression<T> {
 	public:
-		NaryExpressionModel(Expression<T>** ,NaryExpression<T>*);
+		NaryExpressionModel(std::vector<Expression<T>*>* ,NaryExpression<T>*);
 		virtual ~NaryExpressionModel();
 
-		virtual T evaluate();
+		virtual T evaluate() const;
 		virtual T evaluate(std::vector<Expression<T>*>*) const;
 
 	private:
-		Expression<T>** operands;
+		std::vector<Expression<T>*>* operands;
 		NaryExpression<T>* _operator;
 	};
 
 	template<class T>
-	NaryExpressionModel<T>::NaryExpressionModel(Expression<T>** _operands ,NaryExpression<T>* ope) :
+	NaryExpressionModel<T>::NaryExpressionModel(std::vector<Expression<T>*>* _operands ,NaryExpression<T>* ope) :
 	operands(_operands),_operator(ope)
 	{
 	}
@@ -42,17 +42,17 @@ namespace core {
 	}
 
 	template<class T>
-	T NaryExpressionModel<T>::evaluate() {
+	T NaryExpressionModel<T>::evaluate() const {
 		if(_operator != nullptr)
 			return _operator->evaluate(operands);
-		throw NullPtrException(typeid(NaryExpressionModel).name());
+		throw NullPtrException();
 	}
 
 	template<class T>
 	T NaryExpressionModel<T>::evaluate(std::vector<Expression<T>*>* _operands) const {
 		if(_operands != nullptr)
 			return evaluate(_operands);
-		throw NullPtrException(typeid(NaryExpressionModel).name());
+		throw NullPtrException();
 	}
 }
 

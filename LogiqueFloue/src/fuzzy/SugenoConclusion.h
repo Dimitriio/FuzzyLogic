@@ -17,7 +17,7 @@ namespace fuzzy {
 	class SugenoConclusion : public core::NaryExpression<T> {
 	public:
 		SugenoConclusion(std::vector<T>);
-		virtual ~SugenoConclusion();
+		virtual ~SugenoConclusion() {};
 
 		virtual T evaluate(std::vector<core::Expression<T>*>*) const;
 

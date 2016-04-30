@@ -145,7 +145,7 @@ void testNullptrException()
 		assert(true);
 	}
 }
-/*
+
 void factoryTest()
 {
 	//operators
@@ -219,7 +219,7 @@ void factoryTest()
 		std::cout << "tips -> " << system->evaluate() << std::endl;
 	}
 }
-*/
+
 void SugenoTest(){
 	//operators
 		using namespace core;
@@ -259,33 +259,38 @@ void SugenoTest(){
 		ValueModel<double> food(8.0);
 		ValueModel<double> tips(0.0);
 
-		Expression<double> *r =
-				f.newAgg(
-						f.newAgg(
-								f.newThen(
-										f.newOr(
-												f.newIs(&poor,&service),
-												f.newIs(&rancid,&food)
-										),
-										f.newIs(&cheap,&tips)
-								),
-								f.newThen(
-										f.newIs(&good,&service),
-										f.newIs(&average,&tips)
-								)
-						),
-						f.newOr(
-								f.newThen(
-										f.newIs(&excellent,&service),
-										f.newIs(&delicious,&food)
-								),
-								f.newIs(&generous,&tips)
-						)
-				);
 
+		std::vector<core::Expression<double>*> rules;
+		std::vector<core::Expression<double>*> SC_service_food1;
+		std::vector<core::Expression<double>*> SC_service_food2;
+		std::vector<core::Expression<double>*> SC_service;
+
+		rules.push_back(
+				f.newThen(
+							f.newOr(
+								f.newIs(&poor, &service),
+								f.newIs(&rancid, &food)
+							),
+							f.newConclusion(&SC_service_food1)
+						));
+
+		rules.push_back(
+				f.newThen(
+						f.newIs(&good, &service),
+						f.newConclusion(&SC_service)
+						));
+
+		rules.push_back(
+				f.newThen(
+							f.newOr(
+								f.newIs(&excellent, &service),
+								f.newIs(&delicious, &food)
+							),
+							f.newConclusion(&SC_service_food2)
+						));
 
 		//defuzzification
-		Expression<double> *system = f.newDefuzz(&tips, r, 0.0, 25.0, 1.0);
+		Expression<double> *system = f.newSugeno(&rules);
 
 
 		//apply input
@@ -312,6 +317,7 @@ int main() {
 	testNotMinus1();
 	testIsTriangle();
 	testNullptrException();
-	factoryTest();
+	//factoryTest();
+	SugenoTest();
 	return 0;
 }
