@@ -55,8 +55,8 @@ namespace fuzzy
 		core::BinaryShadowExpression<T> aggE;
 		core::BinaryShadowExpression<T> defuzzE;
 
-		//core::NaryShadowExpression<T> sugenoE;
-		//core::NaryShadowExpression<T> conclusionE;
+		core::NaryShadowExpression<T> sugenoE;
+		core::NaryShadowExpression<T> conclusionE;
 	};
 
 	template<class T>
@@ -71,7 +71,7 @@ namespace fuzzy
 	{
 	}
 
-	/*template<class T>
+	template<class T>
 	FuzzyExpressionFactory<T>::FuzzyExpressionFactory(Not<T>* _not,And<T>* _and,Or<T>* _or,
 			Then<T>* _then,Agg<T>* _agg,SugenoDefuzz<T>* _defuzz, SugenoConclusion<T>* _conclusion):
 			notE(_not),
@@ -83,7 +83,7 @@ namespace fuzzy
 			conclusionE(_conclusion)
 
 	{
-	}*/
+	}
 
 	template<class T>
 	FuzzyExpressionFactory<T>::~FuzzyExpressionFactory()
@@ -121,7 +121,7 @@ namespace fuzzy
 		return this->newBinary(&defuzzE,l,r);
 	}
 
-	/*template<class T>
+	template<class T>
 	core::Expression<T>* FuzzyExpressionFactory<T>::newSugeno(std::vector<core::Expression<T>*>* operands)
 	{
 		return this->newNary(&sugenoE, operands);
@@ -131,7 +131,7 @@ namespace fuzzy
 	core::Expression<T>* FuzzyExpressionFactory<T>::newConclusion(std::vector<core::Expression<T>*>* operands)
 	{
 		return this->newNary(&conclusionE, operands);
-	}*/
+	}
 
 
 	template<class T>
