@@ -16,7 +16,6 @@ class NullPtrException: public std::exception
 {
 public:
 	NullPtrException();
-	virtual ~NullPtrException() {};
 	virtual const char* what() const throw();
 };
 

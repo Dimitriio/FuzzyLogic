@@ -19,7 +19,7 @@ namespace fuzzy {
 		SugenoConclusion(std::vector<T>);
 		virtual ~SugenoConclusion();
 
-		virtual T evaluate(std::vector<Expression<T>*>*) const;
+		virtual T evaluate(std::vector<core::Expression<T>*>*) const;
 
 	private:
 		std::vector<T> coeffs;
@@ -32,10 +32,14 @@ namespace fuzzy {
 	}
 
 	template<class T>
-	T SugenoConclusion<T>::evaluate(std::vector<Expression<T>*>* operands) const{
+	T SugenoConclusion<T>::evaluate(std::vector<core::Expression<T>*>* operands) const{
 		T tmp = coeffs[0];
-		for(int i = 0; i < operands->size(); i++)
-			tmp += operands[i]->evaluate() * coeffs[i+1];
+
+		typename std::vector<core::Expression<T>*>::iterator it;
+
+		int i = 0;
+		for(it = operands->begin(); it != operands->end(); it++, i++)
+			tmp += (*it)->evaluate() * coeffs[i+1];
 		return tmp;
 	}
 }

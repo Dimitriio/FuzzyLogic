@@ -12,7 +12,10 @@
 #include "../core/Expression.h"
 #include "../core/ExpressionFactory.h"
 #include "../core/UnaryShadowExpression.h"
+#include "../core/NaryShadowExpression.h"
 #include "MamdaniDefuzz.h"
+#include "SugenoDefuzz.h"
+#include "SugenoConclusion.h"
 #include "Operators.h"
 
 
@@ -24,6 +27,7 @@ namespace fuzzy
 	{
 	public:
 		FuzzyExpressionFactory(Not<T>*,And<T>*,Or<T>*,Then<T>*,Agg<T>*,MandaniDefuzz<T>*);
+		FuzzyExpressionFactory(Not<T>*,And<T>*,Or<T>*,Then<T>*,Agg<T>*,SugenoDefuzz<T>*, SugenoConclusion<T>*);
 		~FuzzyExpressionFactory();
 
 		core::Expression<T>* newAnd(core::Expression<T>*,core::Expression<T>*);
@@ -33,6 +37,8 @@ namespace fuzzy
 		core::Expression<T>* newDefuzz(core::Expression<T>*,core::Expression<T>*,const T&, const T&,const T&);
 		core::Expression<T>* newNot(core::Expression<T>*);
 		core::Expression<T>* newIs(Is<T>*,core::Expression<T>*);
+		core::Expression<T>* newSugeno(std::vector<core::Expression<T>*>*);
+		core::Expression<T>* newConclusion(std::vector<core::Expression<T>*>*);
 
 		void changeAnd(And<T>*);
 		void changeOr(Or<T>*);
@@ -48,6 +54,9 @@ namespace fuzzy
 		core::BinaryShadowExpression<T> thenE;
 		core::BinaryShadowExpression<T> aggE;
 		core::BinaryShadowExpression<T> defuzzE;
+
+		//core::NaryShadowExpression<T> sugenoE;
+		//core::NaryShadowExpression<T> conclusionE;
 	};
 
 	template<class T>
@@ -61,6 +70,20 @@ namespace fuzzy
 			defuzzE(_defuzz)
 	{
 	}
+
+	/*template<class T>
+	FuzzyExpressionFactory<T>::FuzzyExpressionFactory(Not<T>* _not,And<T>* _and,Or<T>* _or,
+			Then<T>* _then,Agg<T>* _agg,SugenoDefuzz<T>* _defuzz, SugenoConclusion<T>* _conclusion):
+			notE(_not),
+			andE(_and),
+			orE(_or),
+			thenE(_then),
+			aggE(_agg),
+			sugenoE(_defuzz),
+			conclusionE(_conclusion)
+
+	{
+	}*/
 
 	template<class T>
 	FuzzyExpressionFactory<T>::~FuzzyExpressionFactory()
@@ -97,6 +120,19 @@ namespace fuzzy
 		((MandaniDefuzz<T>*)defuzzE.getTarget())->setValues(min,max,step);
 		return this->newBinary(&defuzzE,l,r);
 	}
+
+	/*template<class T>
+	core::Expression<T>* FuzzyExpressionFactory<T>::newSugeno(std::vector<core::Expression<T>*>* operands)
+	{
+		return this->newNary(&sugenoE, operands);
+	}
+
+	template<class T>
+	core::Expression<T>* FuzzyExpressionFactory<T>::newConclusion(std::vector<core::Expression<T>*>* operands)
+	{
+		return this->newNary(&conclusionE, operands);
+	}*/
+
 
 	template<class T>
 	core::Expression<T>* FuzzyExpressionFactory<T>::newNot(core::Expression<T>* o)

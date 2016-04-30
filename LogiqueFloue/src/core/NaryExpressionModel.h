@@ -20,7 +20,7 @@ namespace core {
 	class NaryExpressionModel : public Expression<T>,NaryExpression<T> {
 	public:
 		NaryExpressionModel(Expression<T>** ,NaryExpression<T>*);
-		virtual ~NaryExpressionModel() {};
+		virtual ~NaryExpressionModel();
 
 		virtual T evaluate();
 		virtual T evaluate(std::vector<Expression<T>*>*) const;

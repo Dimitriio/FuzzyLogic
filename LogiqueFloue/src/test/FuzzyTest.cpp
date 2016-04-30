@@ -31,7 +31,7 @@
 #include "../fuzzy/ThenMult.h"
 #include "../fuzzy/SugenoDefuzz.h"
 #include "../fuzzy/SugenoThen.h"
-
+#include <vector>
 void testValueModel()
 {
 	core::ValueModel<float> vm(0.1f);
@@ -156,8 +156,8 @@ void factoryTest()
 	AndMin<double> opAnd;
 	OrMax<double> opOr;
 	AggMax<double> opAgg;
-	ThenMin<double> opThen; // SugenoThen
-	CogDefuzz<double> opDefuzz; // Sugeno Defuzz
+	ThenMin<double> opThen;
+	CogDefuzz<double> opDefuzz;
 
 	//fuzzy expression factory
 	FuzzyExpressionFactory<double> f(&opNot,&opAnd,&opOr,&opThen,&opAgg,&opDefuzz);
@@ -220,20 +220,7 @@ void factoryTest()
 	}
 }
 
-void SugenoTest(){
-
-/*	vector<exp> stock = {NewIs(&service, poor}, newIs(&food, rancid)};
-	liste regle;
-	newThen(
-		newOr(
-			newIs(poor, service);
-			newIs(food, rancid);
-		)
-		newConlusion(stock);
-	)
-
-	newThen blablalba*/
-
+/*void SugenoTest(){
 	//operators
 		using namespace core;
 		using namespace fuzzy;
@@ -245,8 +232,14 @@ void SugenoTest(){
 		SugenoThen<double> opThen;
 		SugenoDefuzz<double> opDefuzz;
 
+		std::vector<double> coeffs;
+		coeffs.push_back(1);
+		coeffs.push_back(1);
+		coeffs.push_back(1);
+
+		SugenoConclusion<double> opConclusion(coeffs);
 		//fuzzy expression factory
-		FuzzyExpressionFactory<double> f(&opNot,&opAnd,&opOr,&opThen,&opAgg,&opDefuzz);
+		FuzzyExpressionFactory<double> f(&opNot,&opAnd,&opOr,&opThen,&opAgg,&opDefuzz, &opConclusion);
 
 		//membership function
 		IsCumulativeGaussian<double> poor(2.5,1.5,3);
@@ -305,7 +298,7 @@ void SugenoTest(){
 			std::cout << "tips -> " << system->evaluate() << std::endl;
 		}
 }
-
+*/
 int main() {
 	testValueModel();
 	testAndMin();
