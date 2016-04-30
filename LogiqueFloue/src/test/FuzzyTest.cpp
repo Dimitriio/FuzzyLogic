@@ -242,7 +242,7 @@ void SugenoTest(){
 		FuzzyExpressionFactory<double> f(&opNot,&opAnd,&opOr,&opThen,&opAgg,&opDefuzz, &opConclusion);
 
 		//membership function
-		IsCumulativeGaussian<double> poor(2.5,1.5,3);
+		IsCumulativeGaussian<double> poor(2.5,1.5,5);
 		IsGaussian<double> good(5,1.5);
 		IsCumulativeGaussian<double> excellent(7.5,1.5,5);
 
