@@ -8,7 +8,12 @@
 #ifndef NARYEXPRESSIONMODEL_H_
 #define NARYEXPRESSIONMODEL_H_
 
-#include "core/Expression.h"
+#include <typeinfo>
+#include <vector>
+
+#include "Expression.h"
+#include "NaryExpression.h"
+#include "NullPtrException.h"
 
 namespace core {
 	template<class T>
@@ -40,14 +45,14 @@ namespace core {
 	T NaryExpressionModel<T>::evaluate() {
 		if(_operator != nullptr)
 			return _operator->evaluate(operands);
-		throw;
+		throw NullPtrException(typeid(NaryExpressionModel).name());
 	}
 
 	template<class T>
 	T NaryExpressionModel<T>::evaluate(std::vector<Expression<T>*>* _operands) const {
 		if(_operands != nullptr)
 			return evaluate(_operands);
-		throw;
+		throw NullPtrException(typeid(NaryExpressionModel).name());
 	}
 }
 

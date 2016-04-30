@@ -8,7 +8,10 @@
 #ifndef CORE_UNARYEXPRESSIONMODEL_H_
 #define CORE_UNARYEXPRESSIONMODEL_H_
 
+#include <typeinfo>
+
 #include "Expression.h"
+#include "NullPtrException.h"
 #include "UnaryExpression.h"
 
 namespace core
@@ -38,6 +41,7 @@ namespace core
 	{
 		if (operand != nullptr)
 			return evaluate(operand);
+		throw NullPtrException();
 	}
 
 	template<class T>
@@ -45,6 +49,7 @@ namespace core
 	{
 		if(_operator != nullptr)
 			return _operator->evaluate(o);
+		throw NullPtrException();
 	}
 }
 #endif /* CORE_UNARYEXPRESSIONMODEL_H_ */
