@@ -145,7 +145,7 @@ void testNullptrException()
 		assert(true);
 	}
 }
-
+/*
 void factoryTest()
 {
 	//operators
@@ -219,8 +219,8 @@ void factoryTest()
 		std::cout << "tips -> " << system->evaluate() << std::endl;
 	}
 }
-
-/*void SugenoTest(){
+*/
+void SugenoTest(){
 	//operators
 		using namespace core;
 		using namespace fuzzy;
@@ -298,7 +298,7 @@ void factoryTest()
 			std::cout << "tips -> " << system->evaluate() << std::endl;
 		}
 }
-*/
+
 int main() {
 	testValueModel();
 	testAndMin();

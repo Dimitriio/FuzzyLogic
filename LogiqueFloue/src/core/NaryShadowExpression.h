@@ -19,6 +19,7 @@ namespace core {
 	template<class T>
 	class NaryShadowExpression : public NaryExpression<T>{
 	public:
+		NaryShadowExpression() {};
 		NaryShadowExpression(NaryExpression<T>*);
 		virtual ~NaryShadowExpression();
 

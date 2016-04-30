@@ -22,6 +22,7 @@ namespace core
 	{
 	public:
 		BinaryShadowExpression(BinaryExpression<T>*);
+		BinaryShadowExpression() {};
 		virtual ~BinaryShadowExpression();
 
 		virtual void setTarget(BinaryExpression<T>*);
