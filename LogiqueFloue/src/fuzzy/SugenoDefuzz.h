@@ -19,7 +19,7 @@ namespace fuzzy {
 		SugenoDefuzz() {};
 		virtual ~SugenoDefuzz() {};
 
-		virtual T evaluate(std::vector<Expression<T>*>* ) const;
+		virtual T evaluate(std::vector<Expression<T>*>*) const;
 	};
 
 	template <class T>

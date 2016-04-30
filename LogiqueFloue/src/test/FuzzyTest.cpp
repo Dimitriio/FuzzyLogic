@@ -29,6 +29,8 @@
 #include "../fuzzy/OrPlus.h"
 #include "../fuzzy/ThenMin.h"
 #include "../fuzzy/ThenMult.h"
+#include "../fuzzy/SugenoDefuzz.h"
+#include "../fuzzy/SugenoThen.h"
 
 void testValueModel()
 {
@@ -154,8 +156,8 @@ void factoryTest()
 	AndMin<double> opAnd;
 	OrMax<double> opOr;
 	AggMax<double> opAgg;
-	ThenMin<double> opThen;
-	CogDefuzz<double> opDefuzz;
+	ThenMin<double> opThen; // SugenoThen
+	CogDefuzz<double> opDefuzz; // Sugeno Defuzz
 
 	//fuzzy expression factory
 	FuzzyExpressionFactory<double> f(&opNot,&opAnd,&opOr,&opThen,&opAgg,&opDefuzz);
@@ -202,6 +204,7 @@ void factoryTest()
 					)
 			);
 
+
 	//defuzzification
 	Expression<double> *system = f.newDefuzz(&tips, r, 0.0, 25.0, 1.0);
 
@@ -215,6 +218,92 @@ void factoryTest()
 		service.setValue(s);
 		std::cout << "tips -> " << system->evaluate() << std::endl;
 	}
+}
+
+void SugenoTest(){
+
+/*	vector<exp> stock = {NewIs(&service, poor}, newIs(&food, rancid)};
+	liste regle;
+	newThen(
+		newOr(
+			newIs(poor, service);
+			newIs(food, rancid);
+		)
+		newConlusion(stock);
+	)
+
+	newThen blablalba*/
+
+	//operators
+		using namespace core;
+		using namespace fuzzy;
+
+		NotMinus1<double> opNot;
+		AndMin<double> opAnd;
+		OrMax<double> opOr;
+		AggMax<double> opAgg;
+		SugenoThen<double> opThen;
+		SugenoDefuzz<double> opDefuzz;
+
+		//fuzzy expression factory
+		FuzzyExpressionFactory<double> f(&opNot,&opAnd,&opOr,&opThen,&opAgg,&opDefuzz);
+
+		//membership function
+		IsCumulativeGaussian<double> poor(2.5,1.5,3);
+		IsGaussian<double> good(5,1.5);
+		IsCumulativeGaussian<double> excellent(7.5,1.5,5);
+
+		IsTrapeze<double> rancid(4.0,2.0);
+		IsTrapeze<double> delicious(6.0,8.0);
+
+		IsTriangle<double> cheap(0,4.17,8.33);
+		IsTriangle<double> average(8.33,12.5,16.67);
+		IsTriangle<double> generous(16.67,20.83,25);
+
+		//values
+
+		ValueModel<double> service(0.0);
+		ValueModel<double> food(8.0);
+		ValueModel<double> tips(0.0);
+
+		Expression<double> *r =
+				f.newAgg(
+						f.newAgg(
+								f.newThen(
+										f.newOr(
+												f.newIs(&poor,&service),
+												f.newIs(&rancid,&food)
+										),
+										f.newIs(&cheap,&tips)
+								),
+								f.newThen(
+										f.newIs(&good,&service),
+										f.newIs(&average,&tips)
+								)
+						),
+						f.newOr(
+								f.newThen(
+										f.newIs(&excellent,&service),
+										f.newIs(&delicious,&food)
+								),
+								f.newIs(&generous,&tips)
+						)
+				);
+
+
+		//defuzzification
+		Expression<double> *system = f.newDefuzz(&tips, r, 0.0, 25.0, 1.0);
+
+
+		//apply input
+		float s;
+		while(true)
+		{
+			std::cout << "service : ";
+			std::cin >> s;
+			service.setValue(s);
+			std::cout << "tips -> " << system->evaluate() << std::endl;
+		}
 }
 
 int main() {
