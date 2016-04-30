@@ -8,7 +8,8 @@
 #ifndef FUZZY_SUGENODEFUZZ_H_
 #define FUZZY_SUGENODEFUZZ_H_
 
-#include "NaryExpression.h"
+#include "../core/NaryExpression.h"
+#include "../fuzzy/SugenoThen.h"
 
 namespace fuzzy {
 	template <class T>
@@ -18,21 +19,21 @@ namespace fuzzy {
 		SugenoDefuzz() {};
 		virtual ~SugenoDefuzz() {};
 
-		T evaluate(std::vector<Expression<T>*>*) const;
+		T evaluate(std::vector<core::Expression<T>*>*) const;
 	};
 
 	template <class T>
-	T SugenoDefuzz<T>::evaluate(std::vector<Expression<T>*>* operands) const
+	T SugenoDefuzz<T>::evaluate(std::vector<core::Expression<T>*>* operands) const
 	{
 		T num, denum = 0;
+		typename std::vector<core::Expression<T>*>::const_iterator it;
 
-		for(core::Expression<T>* t : operands)
-		{
-			core::BinaryExpressionModel<T>*  bem = (core::BinaryExpressionModel<T>*) (t);
-			core::BinaryShadowExpression<T>* bse = (core::BinaryShadowExpression<T>*) bem->GetOpe();
-			SugenoThen<T>* sth = (SugenoThen<T>*) bse->GetTarget();
+		for(it = operands->begin(); it != operands->end(); it++){
+			core::BinaryExpressionModel<T>*  bem = (core::BinaryExpressionModel<T>*) (*it);
+			core::BinaryShadowExpression<T>* bse = (core::BinaryShadowExpression<T>*) bem->getOperator();
+			SugenoThen<T>* sth = (SugenoThen<T>*) bse->getTarget();
 
-			num += t->evaluate(); // wi * zi
+			num += (*it)->evaluate(); // wi * zi
 			denum += sth->getPremise(); // wi
 		}
 

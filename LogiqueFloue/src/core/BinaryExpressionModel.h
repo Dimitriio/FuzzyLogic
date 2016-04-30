@@ -25,6 +25,7 @@ namespace core
 
 		virtual T evaluate() const;
 		virtual T evaluate(Expression<T>*,Expression<T>*) const;
+		virtual BinaryExpression<T>* getOperator() const;
 	private:
 		Expression<T>* left, *right;
 		BinaryExpression<T>* _operator;
@@ -55,6 +56,11 @@ namespace core
 		if(_operator != nullptr)
 			return _operator->evaluate(l, r);
 		throw NullPtrException();
+	}
+
+	template<class T>
+	BinaryExpression<T>* BinaryExpressionModel<T>::getOperator() const {
+		return _operator;
 	}
 }
 #endif
