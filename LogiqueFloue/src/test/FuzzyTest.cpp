@@ -233,8 +233,8 @@ void SugenoTest(){
 		SugenoDefuzz<double> opDefuzz;
 
 		std::vector<double> coeffs;
-		coeffs.push_back(1);
-		coeffs.push_back(1);
+		coeffs.push_back(10);
+		coeffs.push_back(4);
 		coeffs.push_back(1);
 
 		SugenoConclusion<double> opConclusion(coeffs);
@@ -305,18 +305,18 @@ void SugenoTest(){
 }
 
 int main() {
-	testValueModel();
-	testAndMin();
-	testAndMult();
-	testOrMax();
-	testOrPlus();
-	testThenMin();
-	testThenMult();
-	testAggMax();
-	testAggPlus();
-	testNotMinus1();
-	testIsTriangle();
-	testNullptrException();
+	//testValueModel();
+	//testAndMin();
+	//testAndMult();
+	//testOrMax();
+	//testOrPlus();
+	//testThenMin();
+	//testThenMult();
+	//testAggMax();
+	//testAggPlus();
+	//testNotMinus1();
+	//testIsTriangle();
+	//testNullptrException();
 	//factoryTest();
 	SugenoTest();
 	return 0;

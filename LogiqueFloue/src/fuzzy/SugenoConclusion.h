@@ -38,8 +38,10 @@ namespace fuzzy {
 		typename std::vector<core::Expression<T>*>::iterator it;
 
 		int i = 0;
-		for(it = operands->begin(); it != operands->end(); it++, i++)
+		for(it = operands->begin(); it != operands->end(); it++){
 			tmp += (*it)->evaluate() * coeffs[i+1];
+			i++;
+		}
 		return tmp;
 	}
 }

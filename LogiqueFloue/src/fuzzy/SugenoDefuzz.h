@@ -25,16 +25,20 @@ namespace fuzzy {
 	template <class T>
 	T SugenoDefuzz<T>::evaluate(std::vector<core::Expression<T>*>* operands) const
 	{
-		T num, denum = 0;
+		T num = 0;
+		T denum = 0;
 		typename std::vector<core::Expression<T>*>::const_iterator it;
 
 		for(it = operands->begin(); it != operands->end(); it++){
 			core::BinaryExpressionModel<T>*  bem = (core::BinaryExpressionModel<T>*) (*it);
 			core::BinaryShadowExpression<T>* bse = (core::BinaryShadowExpression<T>*) bem->getOperator();
 			SugenoThen<T>* sth = (SugenoThen<T>*) bse->getTarget();
-
 			num += (*it)->evaluate(); // wi * zi
 			denum += sth->getPremise(); // wi
+			std::cout << num;
+			std::cout << " - ";
+			std::cout << denum;
+			std::cout << std::endl;
 		}
 
 		if (denum != 0)
