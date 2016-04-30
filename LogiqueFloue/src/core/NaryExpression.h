@@ -12,7 +12,8 @@ namespace core {
 	template<class T>
 	class NaryExpression {
 	public:
-		virtual ~NaryExpression();
+		NaryExpression() {};
+		virtual ~NaryExpression() {};
 
 		virtual T evaluate(std::vector<Expression<T>*>*) const =0;
 	};
