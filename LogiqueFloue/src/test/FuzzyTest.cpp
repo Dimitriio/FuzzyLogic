@@ -233,8 +233,8 @@ void SugenoTest(){
 		SugenoDefuzz<double> opDefuzz;
 
 		std::vector<double> coeffs;
-		coeffs.push_back(10);
-		coeffs.push_back(4);
+		coeffs.push_back(1);
+		coeffs.push_back(1);
 		coeffs.push_back(1);
 
 		SugenoConclusion<double> opConclusion(coeffs);
@@ -261,9 +261,13 @@ void SugenoTest(){
 
 
 		std::vector<core::Expression<double>*> rules;
-		std::vector<core::Expression<double>*> SC_service_food1;
-		std::vector<core::Expression<double>*> SC_service_food2;
-		std::vector<core::Expression<double>*> SC_service;
+
+		std::vector<core::Expression<double>*> sf;
+		sf.push_back(&service);
+		sf.push_back(&food);
+
+		std::vector<core::Expression<double>*> serv;
+		serv.push_back(&service);
 
 		rules.push_back(
 				f.newThen(
@@ -271,13 +275,13 @@ void SugenoTest(){
 								f.newIs(&poor, &service),
 								f.newIs(&rancid, &food)
 							),
-							f.newConclusion(&SC_service_food1)
+							f.newConclusion(&sf)
 						));
 
 		rules.push_back(
 				f.newThen(
 						f.newIs(&good, &service),
-						f.newConclusion(&SC_service)
+						f.newConclusion(&serv)
 						));
 
 		rules.push_back(
@@ -286,7 +290,7 @@ void SugenoTest(){
 								f.newIs(&excellent, &service),
 								f.newIs(&delicious, &food)
 							),
-							f.newConclusion(&SC_service_food2)
+							f.newConclusion(&sf)
 						));
 
 		//defuzzification
