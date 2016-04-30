@@ -17,6 +17,7 @@ namespace core {
 
 		virtual T evaluate(std::vector<Expression<T>*>*) const;
 
+
 	private:
 		NaryExpression<T>* target;
 	};
