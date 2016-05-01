@@ -197,8 +197,8 @@ void factoryTest()
 									f.newIs(&average,&tips)
 							)
 					),
-					f.newOr(
-							f.newThen(
+					f.newThen(
+							f.newOr(
 									f.newIs(&excellent,&service),
 									f.newIs(&delicious,&food)
 							),
