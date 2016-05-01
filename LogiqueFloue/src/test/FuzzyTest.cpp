@@ -359,12 +359,12 @@ void GestionPassage(){
 									),
 							f.newIs(&doNothing, &nextTime)
 							),
-					f.newOr(
-							f.newThen(
-									f.newIs(&lowTS, &timeSpent),
-									f.newIs(&normalTL, &timeLeft)
-									),
-								f.newIs(&increase, &nextTime)
+					f.newThen(
+							f.newOr(
+								f.newIs(&lowTS, &timeSpent),
+								f.newIs(&normalTL, &timeLeft)
+								),
+						f.newIs(&increase, &nextTime)
 							)
 					);
 
