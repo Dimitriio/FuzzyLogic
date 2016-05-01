@@ -16,7 +16,7 @@
 namespace fuzzy
 {
 	template <class T>
-	class CogDefuzz : public MandaniDefuzz<T>
+	class CogDefuzz : public MamdaniDefuzz<T>
 	{
 	public:
 		CogDefuzz();
@@ -27,7 +27,7 @@ namespace fuzzy
 
 	template <class T>
 	CogDefuzz<T>::CogDefuzz():
-	MandaniDefuzz<T>()
+	MamdaniDefuzz<T>()
 	{
 	}
 

@@ -38,7 +38,7 @@ typedef IsCumulativeGaussian<NUMBER> isCumulativeGaussian;
 typedef IsGaussian<NUMBER> isGaussian;
 typedef IsTrapeze<NUMBER> isTrapeze;
 typedef IsTriangle<NUMBER> isTriangle;
-typedef MandaniDefuzz<NUMBER> mandaniDefuzz;
+typedef MamdaniDefuzz<NUMBER> mandaniDefuzz;
 typedef NotMinus1<NUMBER> notMinus1;
 typedef OrMax<NUMBER> orMax;
 typedef OrPlus<NUMBER> orPlus;

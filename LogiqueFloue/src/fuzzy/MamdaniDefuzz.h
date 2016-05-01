@@ -14,11 +14,11 @@
 namespace fuzzy
 {
 	template <class T>
-	class MandaniDefuzz : public core::BinaryExpression<T>
+	class MamdaniDefuzz : public core::BinaryExpression<T>
 	{
 	public:
-		MandaniDefuzz();
-		virtual ~MandaniDefuzz() {};
+		MamdaniDefuzz();
+		virtual ~MamdaniDefuzz() {};
 
 		virtual void setValues(const T&, const T&, const T&);
 
@@ -30,13 +30,13 @@ namespace fuzzy
 	};
 
 	template <class T>
-	MandaniDefuzz<T>::MandaniDefuzz() :
+	MamdaniDefuzz<T>::MamdaniDefuzz() :
 	min(0), max(0), step(0)
 	{
 	}
 
 	template<class T>
-	void MandaniDefuzz<T>::setValues(const T& _min, const T& _max, const T& _step)
+	void MamdaniDefuzz<T>::setValues(const T& _min, const T& _max, const T& _step)
 	{
 		min = _min;
 		max = _max;
@@ -44,7 +44,7 @@ namespace fuzzy
 	}
 
 	template <class T>
-	T MandaniDefuzz<T>::evaluate(core::Expression<T> *l, core::Expression<T> *r) const
+	T MamdaniDefuzz<T>::evaluate(core::Expression<T> *l, core::Expression<T> *r) const
 	{
 		return defuzz(core::Evaluator<T>::BuildShape(min, max, step, (core::ValueModel<T>*) l, r));
 	}

@@ -475,8 +475,8 @@ int main() {
 	//testNotMinus1();
 	//testIsTriangle();
 	//testNullptrException();
-	factoryTest();
-	//SugenoTest();
-//	GestionPassage();
+//	factoryTest();
+//	SugenoTest();
+	GestionPassage();
 	return 0;
 }

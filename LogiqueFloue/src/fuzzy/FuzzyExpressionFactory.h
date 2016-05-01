@@ -26,7 +26,7 @@ namespace fuzzy
 	class FuzzyExpressionFactory : public core::ExpressionFactory<T>
 	{
 	public:
-		FuzzyExpressionFactory(Not<T>*,And<T>*,Or<T>*,Then<T>*,Agg<T>*,MandaniDefuzz<T>*);
+		FuzzyExpressionFactory(Not<T>*,And<T>*,Or<T>*,Then<T>*,Agg<T>*,MamdaniDefuzz<T>*);
 		FuzzyExpressionFactory(Not<T>*,And<T>*,Or<T>*,Then<T>*,Agg<T>*,SugenoDefuzz<T>*, SugenoConclusion<T>*);
 		~FuzzyExpressionFactory();
 
@@ -44,7 +44,7 @@ namespace fuzzy
 		void changeOr(Or<T>*);
 		void changeThen(Then<T>*);
 		void changeAgg(Agg<T>*);
-		void changeDefuzz(MandaniDefuzz<T>*);
+		void changeDefuzz(MamdaniDefuzz<T>*);
 		void changeNot(Not<T>*);
 		void changeSugeno(SugenoDefuzz<T>*);
 		void changeConclusion(SugenoConclusion<T>*);
@@ -63,7 +63,7 @@ namespace fuzzy
 
 	template<class T>
 	FuzzyExpressionFactory<T>::FuzzyExpressionFactory(Not<T>* _not,And<T>* _and,Or<T>* _or,
-			Then<T>* _then,Agg<T>* _agg,MandaniDefuzz<T>* _defuzz):
+			Then<T>* _then,Agg<T>* _agg,MamdaniDefuzz<T>* _defuzz):
 			notE(_not),
 			andE(_and),
 			orE(_or),
@@ -121,7 +121,7 @@ namespace fuzzy
 	template<class T>
 	core::Expression<T>* FuzzyExpressionFactory<T>::newDefuzz(core::Expression<T>* l,core::Expression<T>* r,const T& min,const T& max, const T& step)
 	{
-		((MandaniDefuzz<T>*)defuzzE.getTarget())->setValues(min,max,step);
+		((MamdaniDefuzz<T>*)defuzzE.getTarget())->setValues(min,max,step);
 		return this->newBinary(&defuzzE,l,r);
 	}
 
@@ -175,7 +175,7 @@ namespace fuzzy
 	}
 
 	template<class T>
-	void FuzzyExpressionFactory<T>::changeDefuzz(MandaniDefuzz<T>* _defuzz)
+	void FuzzyExpressionFactory<T>::changeDefuzz(MamdaniDefuzz<T>* _defuzz)
 	{
 		defuzzE.setTarget(_defuzz);
 	}
