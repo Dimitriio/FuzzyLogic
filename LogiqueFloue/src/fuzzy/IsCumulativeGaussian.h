@@ -37,10 +37,8 @@ namespace fuzzy
 		if(l != nullptr)
 		{
 			T left = l->evaluate();
-			if(left > 2*mean-min)
-				return 0;
-			T a = (left - mean) / stddev;
-			T result = 0.5 * erfc(a / pow(2.0 , 0.5));
+			T a = (mean - left) / stddev;
+			T result = 0.5 * erfc(a / sqrt(2.0));
 
 			if(min < mean)
 				return result;

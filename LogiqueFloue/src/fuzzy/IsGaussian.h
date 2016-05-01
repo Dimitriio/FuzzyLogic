@@ -40,7 +40,7 @@ namespace fuzzy
 			T left = l->evaluate();
 			T a = (left - mean) / stddev;
 
-			return std::exp(-T(0.5) * a * a);
+			return std::exp(-0.5 * pow(a,2.0));
 		}
 	}
 }
