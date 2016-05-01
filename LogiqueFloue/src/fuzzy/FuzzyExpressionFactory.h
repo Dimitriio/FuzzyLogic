@@ -46,6 +46,8 @@ namespace fuzzy
 		void changeAgg(Agg<T>*);
 		void changeDefuzz(MandaniDefuzz<T>*);
 		void changeNot(Not<T>*);
+		void changeSugeno(SugenoDefuzz<T>*);
+		void changeConclusion(SugenoConclusion<T>*);
 
 	private:
 		core::UnaryShadowExpression<T> notE;
@@ -180,6 +182,18 @@ namespace fuzzy
 	void FuzzyExpressionFactory<T>::changeNot(Not<T>* _not)
 	{
 		notE.setTarget(_not);
+	}
+
+	template<class T>
+	void FuzzyExpressionFactory<T>::changeSugeno(SugenoDefuzz<T>* _sug)
+	{
+		sugenoE.setTarget(_sug);
+	}
+
+	template<class T>
+	void FuzzyExpressionFactory<T>::changeConclusion(SugenoConclusion<T>* _con)
+	{
+		conclusionE.setTarget(_con);
 	}
 }
 
