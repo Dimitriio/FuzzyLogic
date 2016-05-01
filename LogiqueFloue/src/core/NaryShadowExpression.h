@@ -19,7 +19,7 @@ namespace core {
 	template<class T>
 	class NaryShadowExpression : public NaryExpression<T>{
 	public:
-		NaryShadowExpression() {};
+		NaryShadowExpression() { target = nullptr;};
 		NaryShadowExpression(NaryExpression<T>*);
 		virtual ~NaryShadowExpression();
 
@@ -41,7 +41,8 @@ namespace core {
 
 	template<class T>
 	NaryShadowExpression<T>::~NaryShadowExpression(){
-		delete target;
+		if(target != nullptr)
+			delete target;
 	}
 
 	template<class T>

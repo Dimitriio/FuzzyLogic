@@ -69,7 +69,9 @@ namespace fuzzy
 			orE(_or),
 			thenE(_then),
 			aggE(_agg),
-			defuzzE(_defuzz)
+			defuzzE(_defuzz),
+			sugenoE(),
+			conclusionE()
 	{
 	}
 
