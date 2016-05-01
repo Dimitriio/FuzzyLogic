@@ -10,6 +10,8 @@
 
 #include <vector>
 
+#include "Expression.h"
+
 namespace core {
 	template<class T>
 	class NaryExpression

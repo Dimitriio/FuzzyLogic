@@ -8,8 +8,14 @@
 #ifndef FUZZY_SUGENODEFUZZ_H_
 #define FUZZY_SUGENODEFUZZ_H_
 
+#include <iostream>
+#include <vector>
+
+#include "../core/BinaryExpressionModel.h"
+#include "../core/BinaryShadowExpression.h"
+#include "../core/Expression.h"
 #include "../core/NaryExpression.h"
-#include "../fuzzy/SugenoThen.h"
+#include "SugenoThen.h"
 
 namespace fuzzy {
 	template <class T>
@@ -19,7 +25,7 @@ namespace fuzzy {
 		SugenoDefuzz() {};
 		virtual ~SugenoDefuzz() {};
 
-		T evaluate(std::vector<core::Expression<T>*>*) const;
+		virtual T evaluate(std::vector<core::Expression<T>*>*) const;
 	};
 
 	template <class T>

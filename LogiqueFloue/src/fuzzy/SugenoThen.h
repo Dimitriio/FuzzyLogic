@@ -9,6 +9,7 @@
 #define FUZZY_SUGENOTHEN_H_
 
 #include "../core/Expression.h"
+#include "Operators.h"
 
 namespace fuzzy {
 

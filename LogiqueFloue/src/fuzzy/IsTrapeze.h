@@ -53,7 +53,7 @@ namespace fuzzy
 				else if(left < max)
 					return 1;
 				else
-					return -(left-max)/(min-max);
+					return (left-min)/(max-min);
 			}
 		}
 	}
