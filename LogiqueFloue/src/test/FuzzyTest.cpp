@@ -308,6 +308,80 @@ void SugenoTest(){
 		}
 }
 
+void GestionPassage(){
+	//operators
+	using namespace core;
+	using namespace fuzzy;
+
+	NotMinus1<double> opNot;
+	AndMin<double> opAnd;
+	OrMax<double> opOr;
+	AggMax<double> opAgg;
+	ThenMin<double> opThen;
+	CogDefuzz<double> opDefuzz;
+
+	//fuzzy expression factory
+	FuzzyExpressionFactory<double> f(&opNot,&opAnd,&opOr,&opThen,&opAgg,&opDefuzz);
+
+	// Initial parameters;
+	double time = 240; // in minutes
+	double nbGroup = 16;
+	double firstTime = time/nbGroup;
+
+	//membership function timeSpend
+	IsTrapeze<double> lowTS(15, 7.5); // lower trapeze
+	IsTriangle<double> normalTS(7.5, 15, 22.5);
+	IsTrapeze<double> highTS(15, 22.5); //higher trapeze
+
+
+	//membership function time
+	IsTrapeze<double> lowTL(240,120);
+	IsTriangle<double> normalTL(120, 240, 360);
+	IsTrapeze<double> highTL(240,360);
+
+
+	IsTriangle<double> reduce(5,10,15);
+	IsTriangle<double> doNothing(10,15,20);
+	IsTriangle<double> increase(15,20,25);
+
+	//values
+
+	ValueModel<double> timeSpent(0.0);
+	ValueModel<double> timeLeft(240.0);
+	ValueModel<double> nextTime(0.0);
+
+	Expression<double> *r =
+			f.newAgg(
+					f.newThen(
+							f.newOr(
+									f.newIs(&normalTS, &timeSpent),
+									f.newIs(&normalTL, &timeLeft)
+									),
+							f.newIs(&doNothing, &nextTime)
+							),
+					f.newOr(
+							f.newThen(
+									f.newIs(&lowTS, &timeSpent),
+									f.newIs(&normalTL, &timeLeft)
+									),
+								f.newIs(&increase, &nextTime)
+							)
+					);
+
+	//defuzzification
+	Expression<double> *system = f.newDefuzz(&nextTime, r, 0.0, 30, 0.5);
+
+
+	//apply input
+	float s;
+	while(true)
+	{
+		std::cout << "timeSpend : ";
+		std::cin >> s;
+		timeSpent.setValue(s);
+		std::cout << "nextTime -> " << system->evaluate() << std::endl;
+	}
+}
 int main() {
 	//testValueModel();
 	//testAndMin();
@@ -322,6 +396,7 @@ int main() {
 	//testIsTriangle();
 	//testNullptrException();
 	//factoryTest();
-	SugenoTest();
+	//SugenoTest();
+	GestionPassage();
 	return 0;
 }
