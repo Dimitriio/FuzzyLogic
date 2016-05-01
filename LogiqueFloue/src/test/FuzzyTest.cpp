@@ -8,6 +8,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <vector>
 
 #include "../core/BinaryExpressionModel.h"
 #include "../core/Expression.h"
@@ -27,11 +28,12 @@
 #include "../fuzzy/NotMinus1.h"
 #include "../fuzzy/OrMax.h"
 #include "../fuzzy/OrPlus.h"
-#include "../fuzzy/ThenMin.h"
-#include "../fuzzy/ThenMult.h"
+#include "../fuzzy/SugenoConclusion.h"
 #include "../fuzzy/SugenoDefuzz.h"
 #include "../fuzzy/SugenoThen.h"
-#include <vector>
+#include "../fuzzy/ThenMin.h"
+#include "../fuzzy/ThenMult.h"
+
 void testValueModel()
 {
 	core::ValueModel<float> vm(0.1f);
@@ -328,11 +330,11 @@ void GestionPassage(){
 	double nbGroup = 16;
 	double firstTime = time/nbGroup;
 
-	//membership function timeSpend
-	IsTrapeze<double> lowTS(15, 7.5); // lower trapeze
-	IsTriangle<double> normalTS(7.5, 15, 22.5);
-	IsTrapeze<double> highTS(15, 22.5); //higher trapeze
 
+	//Trapeze TS
+	IsTrapeze<double> lowTS(15, 7.5);
+	IsTriangle<double> normalTS(7.5, 15, 22.5);
+	IsTrapeze<double> highTS(15, 22.5);
 
 	//membership function time
 	IsTrapeze<double> lowTL(240,120);
@@ -340,9 +342,9 @@ void GestionPassage(){
 	IsTrapeze<double> highTL(240,360);
 
 
-	IsTriangle<double> reduce(5,10,15);
+	IsTriangle<double> reduce(0,5,10);
 	IsTriangle<double> doNothing(10,15,20);
-	IsTriangle<double> increase(15,20,25);
+	IsTriangle<double> increase(20,25,30);
 
 	//values
 
@@ -352,21 +354,39 @@ void GestionPassage(){
 
 	Expression<double> *r =
 			f.newAgg(
+					f.newAgg(
+							f.newAgg(
+									f.newThen(
+											f.newOr(
+												f.newIs(&lowTS, &timeSpent),
+												f.newIs(&highTL, &timeLeft)
+											),
+											f.newIs(&increase, &nextTime)
+									),
+									f.newThen(
+											f.newOr(
+												f.newIs(&normalTS, &timeSpent),
+												f.newIs(&normalTL, &timeLeft)
+											),
+											f.newIs(&doNothing, &nextTime)
+									)
+							),
+							f.newThen(
+									f.newOr(
+										f.newIs(&highTS, &timeSpent),
+										f.newIs(&lowTL, &timeLeft)
+									),
+									f.newIs(&reduce, &nextTime)
+							)
+					),
 					f.newThen(
 							f.newOr(
 									f.newIs(&normalTS, &timeSpent),
-									f.newIs(&normalTL, &timeLeft)
-									),
-							f.newIs(&doNothing, &nextTime)
+									f.newIs(&lowTL, &timeLeft)
 							),
-					f.newThen(
-							f.newOr(
-									f.newIs(&lowTS, &timeSpent),
-									f.newIs(&normalTL, &timeLeft)
-									),
-						f.newIs(&increase, &nextTime)
-							)
-					);
+							f.newIs(&reduce, &nextTime)
+					)
+			);
 
 	//defuzzification
 	Expression<double> *system = f.newDefuzz(&nextTime, r, 0.0, 30, 0.5);
