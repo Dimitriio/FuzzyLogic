@@ -326,67 +326,127 @@ void GestionPassage(){
 	FuzzyExpressionFactory<double> f(&opNot,&opAnd,&opOr,&opThen,&opAgg,&opDefuzz);
 
 	// Initial parameters;
-	double time = 240; // in minutes
-	double nbGroup = 16;
-	double firstTime = time/nbGroup;
+	double time = 200; // in minutes
+	double nbGroup = 10;
 
 
 	//Trapeze TS
-	IsTrapeze<double> lowTS(15, 7.5);
-	IsTriangle<double> normalTS(7.5, 15, 22.5);
-	IsTrapeze<double> highTS(15, 22.5);
+	IsTriangle<double> lowTS(10, 15, 20);
+	IsTriangle<double> normalTS(15, 20, 25);
+	IsTriangle<double> highTS(20, 25, 30);
 
 	//membership function time
-	IsTrapeze<double> lowTL(240,120);
-	IsTriangle<double> normalTL(120, 240, 360);
-	IsTrapeze<double> highTL(240,360);
+	IsTriangle<double> lowTL(150, 200, 250);
+	IsTriangle<double> normalTL(150, 200, 250);
+	IsTriangle<double> highTL(200,250, 300);
 
 
-	IsTriangle<double> reduce(0,5,10);
-	IsTriangle<double> doNothing(10,15,20);
-	IsTriangle<double> increase(20,25,30);
+	IsTriangle<double> reduce(0,10,20);
+	IsTriangle<double> doNothing(10, 20, 30);
+	IsTriangle<double> increase(20,30,40);
 
 	//values
 
 	ValueModel<double> timeSpent(0.0);
-	ValueModel<double> timeLeft(240.0);
+	ValueModel<double> timeLeft(200);
 	ValueModel<double> nextTime(0.0);
 
 	Expression<double> *r =
-			f.newAgg(
+						f.newAgg(
+								f.newAgg(
+										f.newThen(
+												f.newIs(&lowTS, &timeSpent),
+												f.newIs(&increase, &nextTime)
+										),
+										f.newThen(
+												f.newIs(&highTS, &timeSpent),
+												f.newIs(&reduce, &nextTime)
+										)
+								),
+								f.newThen(
+										f.newIs(&normalTS, &timeSpent),
+										f.newIs(&doNothing, &nextTime)
+								)
+						);
+			/*f.newAgg(
 					f.newAgg(
 							f.newAgg(
-									f.newThen(
-											f.newOr(
-												f.newIs(&lowTS, &timeSpent),
-												f.newIs(&highTL, &timeLeft)
+									f.newAgg(
+											f.newAgg(
+													f.newAgg(
+															f.newAgg(
+																	f.newAgg(
+																			f.newThen(
+																					f.newOr(
+																						f.newIs(&lowTS, &timeSpent),
+																						f.newIs(&highTL, &timeLeft)
+																					),
+																					f.newIs(&increase, &nextTime)
+																			),
+																			f.newThen(
+																					f.newOr(
+																						f.newIs(&normalTS, &timeSpent),
+																						f.newIs(&normalTL, &timeLeft)
+																					),
+																					f.newIs(&doNothing, &nextTime)
+																			)
+																	),
+																	f.newThen(
+																			f.newOr(
+																				f.newIs(&highTS, &timeSpent),
+																				f.newIs(&lowTL, &timeLeft)
+																			),
+																			f.newIs(&reduce, &nextTime)
+																	)
+															),
+															f.newThen(
+																	f.newOr(
+																		f.newIs(&lowTS, &timeSpent),
+																		f.newIs(&lowTL, &timeLeft)
+																	),
+																	f.newIs(&doNothing, &nextTime)
+															)
+													),
+													f.newThen(
+															f.newOr(
+																f.newIs(&highTS, &timeSpent),
+																f.newIs(&highTL, &timeLeft)
+															),
+															f.newIs(&doNothing, &nextTime)
+													)
 											),
-											f.newIs(&increase, &nextTime)
+											f.newThen(
+													f.newOr(
+														f.newIs(&highTS, &timeSpent),
+														f.newIs(&normalTL, &timeLeft)
+													),
+													f.newIs(&reduce, &nextTime)
+											)
 									),
 									f.newThen(
 											f.newOr(
 												f.newIs(&normalTS, &timeSpent),
-												f.newIs(&normalTL, &timeLeft)
+												f.newIs(&lowTL, &timeLeft)
 											),
-											f.newIs(&doNothing, &nextTime)
+											f.newIs(&reduce, &nextTime)
 									)
 							),
 							f.newThen(
 									f.newOr(
-										f.newIs(&highTS, &timeSpent),
-										f.newIs(&lowTL, &timeLeft)
+										f.newIs(&lowTS, &timeSpent),
+										f.newIs(&normalTL, &timeLeft)
 									),
-									f.newIs(&reduce, &nextTime)
+									f.newIs(&increase, &nextTime)
 							)
 					),
 					f.newThen(
 							f.newOr(
-									f.newIs(&normalTS, &timeSpent),
-									f.newIs(&lowTL, &timeLeft)
+								f.newIs(&normalTS, &timeSpent),
+								f.newIs(&highTL, &timeLeft)
 							),
-							f.newIs(&reduce, &nextTime)
+							f.newIs(&increase, &nextTime)
 					)
-			);
+			);*/
 
 	//defuzzification
 	Expression<double> *system = f.newDefuzz(&nextTime, r, 0.0, 30, 0.5);
