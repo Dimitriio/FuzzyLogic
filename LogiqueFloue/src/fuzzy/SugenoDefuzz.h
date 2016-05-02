@@ -41,10 +41,6 @@ namespace fuzzy {
 			SugenoThen<T>* sth = (SugenoThen<T>*) bse->getTarget();
 			num += (*it)->evaluate(); // wi * zi
 			denum += sth->getPremise(); // wi
-			std::cout << num;
-			std::cout << " - ";
-			std::cout << denum;
-			std::cout << std::endl;
 		}
 
 		if (denum != 0)

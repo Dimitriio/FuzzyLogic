@@ -224,93 +224,93 @@ void factoryTest()
 
 void SugenoTest(){
 	//operators
-		using namespace core;
-		using namespace fuzzy;
+	using namespace core;
+	using namespace fuzzy;
 
-		NotMinus1<double> opNot;
-		AndMin<double> opAnd;
-		OrMax<double> opOr;
-		AggMax<double> opAgg;
-		SugenoThen<double> opThen;
-		SugenoDefuzz<double> opDefuzz;
+	NotMinus1<double> opNot;
+	AndMin<double> opAnd;
+	OrMax<double> opOr;
+	AggMax<double> opAgg;
+	SugenoThen<double> opThen;
+	SugenoDefuzz<double> opDefuzz;
 
-		std::vector<double> coeffs;
-		coeffs.push_back(1);
-		coeffs.push_back(1);
-		coeffs.push_back(1);
+	std::vector<double> coeffs;
+	coeffs.push_back(1);
+	coeffs.push_back(1);
+	coeffs.push_back(1);
 
-		SugenoConclusion<double> opConclusion(coeffs);
-		//fuzzy expression factory
-		FuzzyExpressionFactory<double> f(&opNot,&opAnd,&opOr,&opThen,&opAgg,&opDefuzz, &opConclusion);
+	SugenoConclusion<double> opConclusion(coeffs);
+	//fuzzy expression factory
+	FuzzyExpressionFactory<double> f(&opNot,&opAnd,&opOr,&opThen,&opAgg,&opDefuzz, &opConclusion);
 
-		//membership function
-		IsCumulativeGaussian<double> poor(2.5,1.5,5);
-		IsGaussian<double> good(5,1.5);
-		IsCumulativeGaussian<double> excellent(7.5,1.5,5);
+	//membership function
+	IsCumulativeGaussian<double> poor(2.5,1.5,5);
+	IsGaussian<double> good(5,1.5);
+	IsCumulativeGaussian<double> excellent(7.5,1.5,5);
 
-		IsTrapeze<double> rancid(4.0,2.0);
-		IsTrapeze<double> delicious(6.0,8.0);
+	IsTrapeze<double> rancid(4.0,2.0);
+	IsTrapeze<double> delicious(6.0,8.0);
 
-		IsTriangle<double> cheap(0,4.17,8.33);
-		IsTriangle<double> average(8.33,12.5,16.67);
-		IsTriangle<double> generous(16.67,20.83,25);
+	IsTriangle<double> cheap(0,4.17,8.33);
+	IsTriangle<double> average(8.33,12.5,16.67);
+	IsTriangle<double> generous(16.67,20.83,25);
 
-		//values
+	//values
 
-		ValueModel<double> service(0.0);
-		ValueModel<double> food(8.0);
-		ValueModel<double> tips(0.0);
-
-
-		std::vector<core::Expression<double>*> rules;
-
-		std::vector<core::Expression<double>*> sf;
-		sf.push_back(&service);
-		sf.push_back(&food);
-
-		std::vector<core::Expression<double>*> serv;
-		serv.push_back(&service);
-
-		rules.push_back(
-				f.newThen(
-							f.newOr(
-								f.newIs(&poor, &service),
-								f.newIs(&rancid, &food)
-							),
-							f.newConclusion(&sf)
-						));
-
-		rules.push_back(
-				f.newThen(
-						f.newIs(&good, &service),
-						f.newConclusion(&serv)
-						));
-
-		rules.push_back(
-				f.newThen(
-							f.newOr(
-								f.newIs(&excellent, &service),
-								f.newIs(&delicious, &food)
-							),
-							f.newConclusion(&sf)
-						));
-
-		//defuzzification
-		Expression<double> *system = f.newSugeno(&rules);
+	ValueModel<double> service(0.0);
+	ValueModel<double> food(8.0);
+	ValueModel<double> tips(0.0);
 
 
-		//apply input
-		float s;
-		while(true)
-		{
-			std::cout << "service : ";
-			std::cin >> s;
-			service.setValue(s);
-			std::cout << "tips -> " << system->evaluate() << std::endl;
-		}
+	std::vector<core::Expression<double>*> rules;
+
+	std::vector<core::Expression<double>*> sf;
+	sf.push_back(&service);
+	sf.push_back(&food);
+
+	std::vector<core::Expression<double>*> serv;
+	serv.push_back(&service);
+
+	rules.push_back(
+			f.newThen(
+					f.newOr(
+							f.newIs(&poor, &service),
+							f.newIs(&rancid, &food)
+					),
+					f.newConclusion(&sf)
+			));
+
+	rules.push_back(
+			f.newThen(
+					f.newIs(&good, &service),
+					f.newConclusion(&serv)
+			));
+
+	rules.push_back(
+			f.newThen(
+					f.newOr(
+							f.newIs(&excellent, &service),
+							f.newIs(&delicious, &food)
+					),
+					f.newConclusion(&sf)
+			));
+
+	//defuzzification
+	Expression<double> *system = f.newSugeno(&rules);
+
+
+	//apply input
+	float s;
+	while(true)
+	{
+		std::cout << "service : ";
+		std::cin >> s;
+		service.setValue(s);
+		std::cout << "tips -> " << system->evaluate() << std::endl;
+	}
 }
 
-void GestionPassage(){
+void markCog(){
 	//operators
 	using namespace core;
 	using namespace fuzzy;
@@ -325,143 +325,98 @@ void GestionPassage(){
 	//fuzzy expression factory
 	FuzzyExpressionFactory<double> f(&opNot,&opAnd,&opOr,&opThen,&opAgg,&opDefuzz);
 
-	// Initial parameters;
-	double time = 200; // in minutes
-	double nbGroup = 10;
-
-
 	//Trapeze TS
-	IsTriangle<double> lowTS(10, 15, 20);
-	IsTriangle<double> normalTS(15, 20, 25);
-	IsTriangle<double> highTS(20, 25, 30);
+	IsTrapeze<double> tooShort(10,7);
+	IsTriangle<double> normal(7, 10, 13);
+	IsTrapeze<double> tooLong(10,13);
 
 	//membership function time
-	IsTriangle<double> lowTL(150, 200, 250);
-	IsTriangle<double> normalTL(150, 200, 250);
-	IsTriangle<double> highTL(200,250, 300);
+	IsTriangle<double> notWorking(-1, 0, 10);
+	IsTriangle<double> working(0, 10, 11);
 
 
-	IsTriangle<double> reduce(0,10,20);
-	IsTriangle<double> doNothing(10, 20, 30);
-	IsTriangle<double> increase(20,30,40);
+	IsTrapeze<double> bad(10,0);
+	IsTriangle<double> average(0, 10, 20);
+	IsTrapeze<double> good(10,20);
 
 	//values
 
-	ValueModel<double> timeSpent(0.0);
-	ValueModel<double> timeLeft(200);
-	ValueModel<double> nextTime(0.0);
+	ValueModel<double> length(0.0);
+	ValueModel<double> quality(0.0);
+	ValueModel<double> result(0.0);
 
 	Expression<double> *r =
-						f.newAgg(
-								f.newAgg(
-										f.newThen(
-												f.newIs(&lowTS, &timeSpent),
-												f.newIs(&increase, &nextTime)
-										),
-										f.newThen(
-												f.newIs(&highTS, &timeSpent),
-												f.newIs(&reduce, &nextTime)
-										)
-								),
-								f.newThen(
-										f.newIs(&normalTS, &timeSpent),
-										f.newIs(&doNothing, &nextTime)
-								)
-						);
-			/*f.newAgg(
+			f.newAgg(
 					f.newAgg(
 							f.newAgg(
 									f.newAgg(
 											f.newAgg(
-													f.newAgg(
-															f.newAgg(
-																	f.newAgg(
-																			f.newThen(
-																					f.newOr(
-																						f.newIs(&lowTS, &timeSpent),
-																						f.newIs(&highTL, &timeLeft)
-																					),
-																					f.newIs(&increase, &nextTime)
-																			),
-																			f.newThen(
-																					f.newOr(
-																						f.newIs(&normalTS, &timeSpent),
-																						f.newIs(&normalTL, &timeLeft)
-																					),
-																					f.newIs(&doNothing, &nextTime)
-																			)
-																	),
-																	f.newThen(
-																			f.newOr(
-																				f.newIs(&highTS, &timeSpent),
-																				f.newIs(&lowTL, &timeLeft)
-																			),
-																			f.newIs(&reduce, &nextTime)
-																	)
+													f.newThen(
+															f.newAnd(
+																	f.newIs(&tooShort, &length),
+																	f.newIs(&notWorking, &quality)
 															),
-															f.newThen(
-																	f.newOr(
-																		f.newIs(&lowTS, &timeSpent),
-																		f.newIs(&lowTL, &timeLeft)
-																	),
-																	f.newIs(&doNothing, &nextTime)
-															)
+															f.newIs(&bad, &result)
 													),
 													f.newThen(
-															f.newOr(
-																f.newIs(&highTS, &timeSpent),
-																f.newIs(&highTL, &timeLeft)
+															f.newAnd(
+																	f.newIs(&tooShort, &length),
+																	f.newIs(&working, &quality)
 															),
-															f.newIs(&doNothing, &nextTime)
+															f.newIs(&average, &result)
 													)
 											),
 											f.newThen(
-													f.newOr(
-														f.newIs(&highTS, &timeSpent),
-														f.newIs(&normalTL, &timeLeft)
+													f.newAnd(
+															f.newIs(&normal, &length),
+															f.newIs(&notWorking, &quality)
 													),
-													f.newIs(&reduce, &nextTime)
+													f.newIs(&average, &result)
 											)
 									),
 									f.newThen(
-											f.newOr(
-												f.newIs(&normalTS, &timeSpent),
-												f.newIs(&lowTL, &timeLeft)
+											f.newAnd(
+													f.newIs(&normal, &length),
+													f.newIs(&working, &quality)
 											),
-											f.newIs(&reduce, &nextTime)
+											f.newIs(&good, &result)
 									)
 							),
 							f.newThen(
-									f.newOr(
-										f.newIs(&lowTS, &timeSpent),
-										f.newIs(&normalTL, &timeLeft)
+									f.newAnd(
+											f.newIs(&tooLong, &length),
+											f.newIs(&notWorking, &quality)
 									),
-									f.newIs(&increase, &nextTime)
+									f.newIs(&bad, &result)
 							)
 					),
 					f.newThen(
-							f.newOr(
-								f.newIs(&normalTS, &timeSpent),
-								f.newIs(&highTL, &timeLeft)
+							f.newAnd(
+									f.newIs(&tooLong, &length),
+									f.newIs(&working, &quality)
 							),
-							f.newIs(&increase, &nextTime)
+							f.newIs(&average, &result)
 					)
-			);*/
+			);
 
 	//defuzzification
-	Expression<double> *system = f.newDefuzz(&nextTime, r, 0.0, 30, 0.5);
+	Expression<double> *system = f.newDefuzz(&result, r, 0, 20, 0.1);
 
 
 	//apply input
 	float s;
 	while(true)
 	{
-		std::cout << "timeSpend : ";
+		std::cout << "Length (0-20): ";
 		std::cin >> s;
-		timeSpent.setValue(s);
-		std::cout << "nextTime -> " << system->evaluate() << std::endl;
+		length.setValue(s);
+		std::cout << "Quality (0-10) : ";
+		std::cin >> s;
+		quality.setValue(s);
+		std::cout << "Mark : -> " << system->evaluate() << std::endl;
 	}
 }
+
 int main() {
 	//testValueModel();
 	//testAndMin();
@@ -475,8 +430,8 @@ int main() {
 	//testNotMinus1();
 	//testIsTriangle();
 	//testNullptrException();
-//	factoryTest();
-//	SugenoTest();
-	GestionPassage();
+	//	factoryTest();
+	//	SugenoTest();
+	markCog();
 	return 0;
 }
